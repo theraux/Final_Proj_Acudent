@@ -1,0 +1,158 @@
+:root {
+  --color-primary: #F5E3CD;
+  /* light beige */
+  --color-secondary: #FEF3E7;
+  /* softer background */
+  --color-tertiary: #9E5B08;
+  /* accent brown */
+  --color-text: #703803;
+  /* main text */
+}
+
+.user-patient-content-area {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+.user-patient-topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 10px;
+  background-color: var(--color-secondary);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  color: var(--color-text);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* space between toggle and greeting */
+}
+
+.topbar-greeting h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0;
+}
+
+
+.toggle {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.contentarea-topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* space between name and image */
+}
+
+.user-patient-topbar-profile-name {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.contentarea-topbar-user {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-text);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* prevents shrinking */
+}
+
+.contentarea-topbar-user img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.icon-wrapper {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper i {
+  color: #333;
+  font-size: 1rem;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.icon-wrapper .badge {
+  position: absolute;
+  background-color: var(--color-tertiary);
+  color: white;
+  font-size: 0.65rem;
+  padding: 5px 5px;
+  border-radius: 50%;
+  font-weight: bold;
+  top: -8px;
+  right: -10px;
+  min-width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.icon-wrapper:focus {
+  outline: 1.5px solid var(--color-tertiary);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+
+@media (max-width: 1090px) {
+  .topbar-greeting {
+    display: none;
+  }
+  .icon-bell-notif {
+    margin-right: 1.5rem !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .today-date {
+    display: none;
+  }
+  
+}
+
+@media (max-width: 650px) {
+  .contentarea-topbar-profile h4 {
+    display: none;
+  }
+
+  .icon-bell-notif {
+    margin-right: 1.5rem !important;
+  }
+}

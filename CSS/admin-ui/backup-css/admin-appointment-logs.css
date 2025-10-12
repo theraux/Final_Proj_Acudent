@@ -1,0 +1,225 @@
+.admin-appointment-logs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(3.75rem, 10vw, 15rem);
+  width: 80%;
+}
+
+.appointment-logs {
+  border: 1px solid #502C00;
+  border-radius: 30px;
+  padding: clamp(0.75rem, 1vw, 1rem);
+  width: 30%;
+  text-align: center;
+  margin-left: 30vw;
+  margin-bottom: 3%;
+}
+
+.appointment-logs h3 {
+  color: #502C00;
+}
+
+/* Remove header borders */
+.admin-logs-type thead th {
+  border: none !important;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* Style only the data cells */
+.admin-logs-type tbody td {
+  border: 1px solid #502C00; /* brown border */
+  padding: 1.2rem;
+  margin: 0;
+  gap: 0;
+  text-align: center;
+}
+.admin-logs-type tbody {
+  border-radius: 2rem;
+}
+
+.admin-logs-type {
+  border-collapse: separate;  /* allow rounded corners */
+  border-spacing: 0;          /* remove extra gaps */
+  overflow: hidden;
+  margin-left: 40vw;
+  width: 80%;
+}
+
+/* Round first and last cell of first row */
+.admin-logs-type tbody tr:first-child td:first-child {
+  border-top-left-radius: 15px;
+}
+.admin-logs-type tbody tr:first-child td:last-child {
+  border-top-right-radius: 15px;
+}
+
+/* Round first and last cell of last row */
+.admin-logs-type tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+.admin-logs-type tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+/* Remove left border for all cells except the first one */
+.admin-logs-type tbody td:not(:first-child) {
+  border-left: none;
+}
+
+.admin-logs-type tbody td:not(:last-child) {
+  border-right: none;
+}
+
+/* Search Wrapper */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  left: 800px;
+}
+
+.search-wrapper input {
+  border: 1px solid #502C00;
+  border-radius: 20px;
+  padding: 15px 12px 15px 35px; /* Padding on the left for space for the icon */
+  flex-grow: 1;
+}
+
+.search-wrapper i {
+  position: absolute;
+  left: 200px; /* Position the icon inside the input field on the left side */
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  font-size: 1.5rem;
+  pointer-events: none; /* Allow typing without interference */
+}
+
+/* --- Media Queries for responsiveness --- */
+
+/* For devices with width less than or equal to 1200px (tablets and smaller desktops) */
+@media (max-width: 1200px) {
+  .appointment-logs {
+    width: 50%;
+    margin-left: 20vw; /* Adjust for better centering */
+  }
+
+  .admin-logs-type {
+    margin-left: 10vw;
+    width: 90%; /* Take more width on smaller screens */
+  }
+
+  .search-wrapper {
+    left: 50px; /* Adjust left positioning for smaller screens */
+  }
+
+  .search-wrapper input {
+    width: 70%; /* Adjust input width to fit better */
+  }
+
+  .appointment-logs h3 {
+    font-size: 1.5rem; /* Adjust header font size */
+  }
+
+  .admin-logs-type thead th {
+    font-size: 1rem; /* Adjust header font size */
+  }
+
+  .admin-logs-type tbody td {
+    padding: 1rem; /* Reduce padding for smaller screens */
+  }
+}
+
+/* For devices with width less than or equal to 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+  .admin-appointment-logs {
+    width: 90%; /* Increase width to 90% */
+    margin-top: clamp(3.75rem, 8vw, 10rem); /* Adjust top margin */
+  }
+
+  .appointment-logs {
+    width: 70%; /* Increase width for smaller screens */
+    margin-left: 0;
+    margin-bottom: 2%;
+  }
+
+  .admin-logs-type {
+    margin-left: 0;
+    width: 100%; /* Full width on mobile */
+  }
+
+  .search-wrapper {
+    left: 0; /* Remove left margin */
+    justify-content: flex-start; /* Align to the left */
+    width: 100%; /* Allow search input to stretch across */
+    margin-bottom: 1rem; /* Add space below search */
+  }
+
+  .search-wrapper input {
+    width: 80%; /* Increase width of the search input */
+    padding: 12px 10px 12px 30px; /* Adjust padding */
+  }
+
+  .search-wrapper i {
+    left: 15px; /* Adjust icon position */
+  }
+
+  .appointment-logs h3 {
+    font-size: 1.2rem; /* Adjust header font size */
+  }
+
+  .admin-logs-type thead th {
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  .admin-logs-type tbody td {
+    padding: 0.8rem; /* Reduced padding */
+  }
+}
+
+/* For devices with width less than or equal to 480px (mobile devices) */
+@media (max-width: 480px) {
+  .admin-appointment-logs {
+    width: 100%; /* Full width on small screens */
+  }
+
+  .appointment-logs {
+    width: 90%; /* Maximize width on small screens */
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-logs-type {
+    width: 100%; /* Maximize width */
+    margin-left: 0;
+  }
+
+  .search-wrapper {
+    width: 100%; /* Full width search wrapper */
+    padding: 0 10px; /* Add some padding to the sides */
+  }
+
+  .search-wrapper input {
+    width: 100%; /* Full width input */
+    padding: 10px 10px 10px 30px; /* Adjust padding for better fit */
+  }
+
+  .search-wrapper i {
+    left: 10px; /* Adjust icon position */
+  }
+
+  .appointment-logs h3 {
+    font-size: 1rem; /* Smaller font size */
+  }
+
+  .admin-logs-type thead th {
+    font-size: 0.8rem; /* Further reduced font size */
+  }
+
+  .admin-logs-type tbody td {
+    padding: 0.6rem; /* Reduce padding */
+  }
+}

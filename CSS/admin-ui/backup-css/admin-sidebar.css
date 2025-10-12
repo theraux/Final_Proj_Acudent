@@ -1,0 +1,79 @@
+/* ========== RESET & BASE STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+
+}
+html, body {
+    height: 100%;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+    position: fixed;
+    left: 0;
+    background-color: #FEF3E7;
+    border-radius: 5px;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #000;
+}
+
+
+/* ========== PROFILE PIC & USERNAME ========== */
+
+#username-display{
+    color: #502C00;
+}
+.nav-buttons .btn{
+    background-color: #ffffff;
+    padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 5vw, 3rem);
+    border: 1px solid #502C00;
+     font-size: clamp(0.8rem, 1.5vw, 1rem);
+     color: #502C00;
+   
+  
+}
+
+.nav-buttons .btn i {
+    margin-right: 1rem; /* Space between the icon and text */
+    white-space: nowrap;
+    color: #000;
+
+}
+
+/* ========== LOGOUT BUTTON ========== */
+.nav-buttons .btn:hover{
+    background-color: #F5E3CD;
+}
+#appointmentSubmenu .btn {
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 0;
+}
+
+#appointmentSubmenu .btn:hover{
+  background-color: #F5E3CD;
+}
+
+
+
+@media (max-width: 992px) {
+  .nav-buttons .btn {
+    padding: 0.75rem 1.25rem; /* shrink padding */
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-buttons .btn {
+    padding: 0.5rem 0.75rem; /* very small padding */
+  }
+}

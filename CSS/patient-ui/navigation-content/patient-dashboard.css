@@ -1,0 +1,168 @@
+/* ========== Dashboard Container ========== */
+.user-patient-dashboard {
+  padding: 20px 30px;
+  min-height: calc(100vh - 60px); /* minus the topbar height */
+  color: var(--color-text);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Divider Line */
+.line {
+  border-bottom: 1px solid var(--color-primary);
+  margin-bottom: 20px;
+}
+
+/* ========== Healthy Tips Section ========== */
+.user-patient-healthy-tips {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: var(--color-secondary);
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.user-patient-healthy-tips h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.user-patient-healthy-tips p {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--color-text);
+}
+
+/* ========== Dashboard Card Grid (3 Main Cards) ========== */
+.dashboard-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-card {
+  flex: 1 1 calc(33.333% - 20px); /* 3 per row */
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h4 {
+  font-size: 1.1rem;
+  color: var(--color-tertiary);
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+/* ========== Calendar & Side Panels ========== */
+#calendar {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Recent Activity & Quick Actions Cards */
+.card {
+  border-radius: 12px !important;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-weight: 600;
+  color: var(--color-tertiary);
+}
+
+/* Limit Recent Activity height for smaller screens */
+.list-group {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* Buttons in Quick Actions */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ========== Responsive Layout ========== */
+@media (max-width: 992px) {
+  .dashboard-card {
+    flex: 1 1 calc(50% - 20px); /* 2 per row */
+  }
+
+  .user-patient-healthy-tips {
+    flex-direction: column;
+    justify-content: flex-start !important;
+    text-align: left;
+    gap: 10px;
+  }
+
+  .user-patient-healthy-tips h3 {
+    font-size: 1.1rem;
+    white-space: normal;
+  }
+
+  .user-patient-healthy-tips p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #calendar {
+    height: 400px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-card {
+    flex: 1 1 100%; /* 1 per row */
+  }
+
+  .user-patient-healthy-tips {
+    padding: 10px 15px;
+  }
+
+  .user-patient-healthy-tips h3 {
+    font-size: 1rem;
+  }
+
+  .user-patient-healthy-tips p {
+    font-size: 0.9rem;
+  }
+
+  #calendar {
+    height: 350px !important;
+  }
+}

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentalCare - Patient Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .appointment-card {
+            transition: all 0.3s ease;
+        }
+        .appointment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .status-confirmed { background: linear-gradient(135deg, #10b981, #059669); }
+        .status-pending { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .status-completed { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-4 border-blue-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🦷</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">DentalCare MIS</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">Welcome back,</p>
+                        <p class="font-semibold text-gray-800">Sarah Johnson</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span class="text-blue-600 font-semibold">SJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Next Appointment</p>
+                        <p class="text-2xl font-bold text-gray-900">Dec 15</p>
+                        <p class="text-xs text-gray-500">2:30 PM</p>
+                    </div>
+                    <div class="text-green-500 text-3xl">📅</div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Visits</p>
+                        <p class="text-2xl font-bold text-gray-900">24</p>
+                        <p class="text-xs text-gray-500">This year</p>
+                    </div>
+                    <div class="text-blue-500 text-3xl">📊</div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Treatment Plan</p>
+                        <p class="text-2xl font-bold text-gray-900">75%</p>
+                        <p class="text-xs text-gray-500">Complete</p>
+                    </div>
+                    <div class="text-purple-500 text-3xl">🎯</div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Outstanding</p>
+                        <p class="text-2xl font-bold text-gray-900">$245</p>
+                        <p class="text-xs text-gray-500">Balance</p>
+                    </div>
+                    <div class="text-orange-500 text-3xl">💳</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Appointments Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Upcoming Appointments</h2>
+                        <button onclick="showBookingModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                            Book New Appointment
+                        </button>
+                    </div>
+                    
+                    <div id="appointmentsList" class="space-y-4">
+                        <!-- Appointments will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Info -->
+            <div class="space-y-6">
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button onclick="showBookingModal()" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-all">
+                            📅 Book Appointment
+                        </button>
+                        <button onclick="showRecordsModal()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 px-4 rounded-lg font-medium transition-all">
+                            📋 View Records
+                        </button>
+                        <button onclick="showBillingModal()" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-3 px-4 rounded-lg font-medium transition-all">
+                            💳 View Billing
+                        </button>
+                        <button onclick="showContactModal()" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-3 px-4 rounded-lg font-medium transition-all">
+                            📞 Contact Office
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Recent Activity</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 text-sm">✓</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800">Cleaning completed</p>
+                                <p class="text-xs text-gray-500">Nov 28, 2024</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600 text-sm">📅</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800">Appointment scheduled</p>
+                                <p class="text-xs text-gray-500">Nov 25, 2024</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 text-sm">💳</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800">Payment processed</p>
+                                <p class="text-xs text-gray-500">Nov 20, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Book New Appointment</h3>
+                <button onclick="hideBookingModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            <form onsubmit="bookAppointment(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Appointment Type</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option>Regular Cleaning</option>
+                        <option>Consultation</option>
+                        <option>Filling</option>
+                        <option>Root Canal</option>
+                        <option>Extraction</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
+                    <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" min="2024-12-01">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option>9:00 AM</option>
+                        <option>10:30 AM</option>
+                        <option>1:00 PM</option>
+                        <option>2:30 PM</option>
+                        <option>4:00 PM</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+                    <textarea class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Any specific concerns or requests..."></textarea>
+                </div>
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" onclick="hideBookingModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                        Book Appointment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Other Modals (simplified for demo) -->
+    <div id="recordsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-2xl mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Medical Records</h3>
+                <button onclick="hideRecordsModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-gray-800">Last Visit - Nov 28, 2024</h4>
+                    <p class="text-sm text-gray-600 mt-2">Routine cleaning and examination. No issues found. Next cleaning recommended in 6 months.</p>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-gray-800">Treatment History</h4>
+                    <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                        <li>• Filling on tooth #14 - Oct 15, 2024</li>
+                        <li>• Root canal on tooth #19 - Aug 22, 2024</li>
+                        <li>• Regular cleaning - May 28, 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="billingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Billing Information</h3>
+                <button onclick="hideBillingModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-orange-800">Outstanding Balance</h4>
+                    <p class="text-2xl font-bold text-orange-600">$245.00</p>
+                    <p class="text-sm text-orange-600 mt-1">Due: Dec 15, 2024</p>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="font-semibold text-gray-800">Recent Charges</h4>
+                    <div class="text-sm space-y-1">
+                        <div class="flex justify-between">
+                            <span>Cleaning - Nov 28</span>
+                            <span>$120.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Filling - Oct 15</span>
+                            <span>$125.00</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                    Pay Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Contact Information</h3>
+                <button onclick="hideContactModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <span class="text-2xl">📞</span>
+                    <div>
+                        <p class="font-medium text-gray-800">(555) 123-4567</p>
+                        <p class="text-sm text-gray-600">Main Office</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <span class="text-2xl">📧</span>
+                    <div>
+                        <p class="font-medium text-gray-800">info@dentalcare.com</p>
+                        <p class="text-sm text-gray-600">Email</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <span class="text-2xl">📍</span>
+                    <div>
+                        <p class="font-medium text-gray-800">123 Dental Street</p>
+                        <p class="text-sm text-gray-600">Suite 100, City, ST 12345</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <span class="text-2xl">🕒</span>
+                    <div>
+                        <p class="font-medium text-gray-800">Mon-Fri: 8AM-6PM</p>
+                        <p class="text-sm text-gray-600">Sat: 9AM-2PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample appointment data
+        const appointments = [
+            {
+                id: 1,
+                date: '2024-12-15',
+                time: '2:30 PM',
+                type: 'Regular Cleaning',
+                doctor: 'Dr. Smith',
+                status: 'confirmed'
+            },
+            {
+                id: 2,
+                date: '2024-12-22',
+                time: '10:00 AM',
+                type: 'Consultation',
+                doctor: 'Dr. Johnson',
+                status: 'pending'
+            },
+            {
+                id: 3,
+                date: '2024-11-28',
+                time: '3:00 PM',
+                type: 'Cleaning',
+                doctor: 'Dr. Smith',
+                status: 'completed'
+            }
+        ];
+
+        function renderAppointments() {
+            const container = document.getElementById('appointmentsList');
+            container.innerHTML = '';
+
+            appointments.forEach(appointment => {
+                const statusColors = {
+                    confirmed: 'bg-green-100 text-green-800',
+                    pending: 'bg-yellow-100 text-yellow-800',
+                    completed: 'bg-blue-100 text-blue-800'
+                };
+
+                const appointmentCard = document.createElement('div');
+                appointmentCard.className = 'appointment-card bg-gray-50 rounded-lg p-4 border border-gray-200';
+                appointmentCard.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <h4 class="font-semibold text-gray-800">${appointment.type}</h4>
+                                <span class="px-2 py-1 rounded-full text-xs font-medium ${statusColors[appointment.status]}">
+                                    ${appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                                </span>
+                            </div>
+                            <p class="text-sm text-gray-600">📅 ${formatDate(appointment.date)} at ${appointment.time}</p>
+                            <p class="text-sm text-gray-600">👨‍⚕️ ${appointment.doctor}</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            ${appointment.status === 'confirmed' ? `
+                                <button onclick="rescheduleAppointment(${appointment.id})" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                    Reschedule
+                                </button>
+                                <button onclick="cancelAppointment(${appointment.id})" class="text-red-600 hover:text-red-800 text-sm font-medium">
+                                    Cancel
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(appointmentCard);
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function showBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+            document.getElementById('bookingModal').classList.add('flex');
+        }
+
+        function hideBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+            document.getElementById('bookingModal').classList.remove('flex');
+        }
+
+        function showRecordsModal() {
+            document.getElementById('recordsModal').classList.remove('hidden');
+            document.getElementById('recordsModal').classList.add('flex');
+        }
+
+        function hideRecordsModal() {
+            document.getElementById('recordsModal').classList.add('hidden');
+            document.getElementById('recordsModal').classList.remove('flex');
+        }
+
+        function showBillingModal() {
+            document.getElementById('billingModal').classList.remove('hidden');
+            document.getElementById('billingModal').classList.add('flex');
+        }
+
+        function hideBillingModal() {
+            document.getElementById('billingModal').classList.add('hidden');
+            document.getElementById('billingModal').classList.remove('flex');
+        }
+
+        function showContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+            document.getElementById('contactModal').classList.add('flex');
+        }
+
+        function hideContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.getElementById('contactModal').classList.remove('flex');
+        }
+
+        function bookAppointment(event) {
+            event.preventDefault();
+            alert('Appointment request submitted! You will receive a confirmation email shortly.');
+            hideBookingModal();
+        }
+
+        function rescheduleAppointment(id) {
+            alert('Reschedule functionality would open a date/time picker. For this demo, we\'ll show this message.');
+        }
+
+        function cancelAppointment(id) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                alert('Appointment cancelled successfully.');
+                // In a real app, this would remove the appointment from the list
+            }
+        }
+
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAppointments();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98aa3ba236ccbc4b',t:'MTc1OTgwNjkxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

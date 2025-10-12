@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Flex layout to push content to top */
+body {
+  display: flex;
+  flex-direction: column;
+}
+.containerofall {
+  display: flex;
+}
+
+.sidebarcontainer {
+  width: 20%;
+  /* or fixed width */
+}
+
+.content-container {
+  margin-top: 5%;
+  width: 80%;
+  padding: 20px;
+}
+
+
+/* Container for dashboard */
+.dashboard-container {
+  position: relative;
+  padding: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.dashboard-container h2{
+  margin-top: 8%;
+  text-align: center;
+}
+
+/* Grid layout */
+.container-dashboard {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+/* Box styling */
+.box {
+  background-color: #F5E3CD;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+.box span {
+  display: block;
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #502C00;
+}
+
+

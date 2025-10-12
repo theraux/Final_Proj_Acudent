@@ -1,0 +1,335 @@
+/* =========== Sidebar Container =========== */
+.patient-sidebar-container {
+    width: 250px;
+    height: 100vh;
+    background-color: var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden; /* Added: Clips horizontal spills—no page scroll in active */
+    border-bottom-right-radius: 20px;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: width 0.3s ease;
+    box-sizing: border-box; /* Added: Padding/margins inside width—no calc overflow */
+}
+
+.patient-sidebar-container.active {
+    width: 90px;
+    transition: width 0.3s ease;
+}
+
+
+/* ==================== Sidebar Titles ==================== */
+/* Base Styles for Titles (Ensure This Is in Your CSS—Preserves Your Spacing) */
+.sidebar-section-title {
+    font-size: 0.55rem;
+    font-weight: 500;
+    color: var(--color-tertiary);
+    text-transform: uppercase;
+    margin: 1.5rem 0 0.5rem 1.2rem; /* Your full spacing—transitions to 0 in active */
+    opacity: 1;
+    height: auto; /* Base: Natural height (~0.55rem + line-height) */
+    width: auto;
+    margin-left: 8px;
+    overflow: hidden; /* Clips during collapse */
+    white-space: nowrap;
+    transition: 
+        opacity 0.3s ease, 
+        height 0.3s ease, 
+        margin-top 0.3s ease, 
+        margin-bottom 0.3s ease, 
+        margin-left 0.3s ease; /* All animatable for smooth removal */
+    display: block; /* Base display */
+    will-change: opacity, height; /* GPU acceleration—no jitter */
+    line-height: 1; /* Prevents font-induced wobble during shrink */
+}
+
+/* Active State: Smooth Fade + Collapse (Removes Space Gradually) */
+.patient-sidebar-container.active .sidebar-section-title {
+    opacity: 0; /* Visual fade out */
+    height: 0; /* Shrinks vertical space to 0 (smooth removal) */
+    margin-top: 0; /* Flattens top gap (1.5rem → 0) */
+    margin-bottom: 0; /* Flattens bottom gap (0.5rem → 0) */
+    margin-left: 0; /* Optional: Horizontal collapse if needed */
+    /* No display: none here—space removes via height/margin */
+    transition: 
+        opacity 0.3s ease, 
+        height 0.3s ease, 
+        margin-top 0.3s ease, 
+        margin-bottom 0.3s ease, 
+        margin-left 0.3s ease; /* All ease out over 0.3s */
+}
+
+/* Not Active: Smooth Expand + Reveal (Restores Space Gradually) */
+.patient-sidebar-container:not(.active) .sidebar-section-title {
+    opacity: 1; /* Visual fade in */
+    height: auto; /* Grows back to natural height */
+    margin-top: 1.5rem; /* Restores top gap */
+    margin-bottom: 0.5rem; /* Restores bottom gap */
+    margin-left: 8px; /* Restores horizontal */
+    transition: 
+        opacity 0.3s ease, 
+        height 0.3s ease, 
+        margin-top 0.3s ease, 
+        margin-bottom 0.3s ease, 
+        margin-left 0.3s ease; /* All ease in over 0.3s */
+}
+
+/* ==================== Sidebar Behavior ==================== */
+.patient-sidebar-container.active .btn-sidebar span {
+    width: 0;
+    opacity: 0;
+    pointer-events: none; /* prevents clicking hidden text */
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.patient-sidebar-container:not(.active) .btn-sidebar span {
+    width: auto; /* flexible for varying text length */
+    opacity: 1;
+    pointer-events: auto;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+/* ==================== Sidebar Button Styling ==================== */
+.btn-sidebar {
+    display: flex; 
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+    box-sizing: border-box; /* Added: Padding inside width—fits 90px without spill */
+}
+
+.btn-sidebar span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 8px;
+    opacity: 1;
+    width: auto;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-sidebar i {
+    min-width: 20px;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+
+/* ==================== Hover & Active Effects ==================== */
+.btn-sidebar:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    font-weight: 550;
+}
+
+.btn-sidebar.active {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    font-weight: 550;
+}
+
+.btn-sidebar:not(.sidebar-logout-btn):hover::before,
+.btn-sidebar:not(.sidebar-logout-btn).active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: var(--color-text);
+}
+
+/* ==================== Other Buttons ==================== */
+.btn-backtohome {
+    margin-bottom: 1rem !important;
+}
+
+/* =========== Scrollbar Styling =========== */
+.patient-sidebar-container::-webkit-scrollbar {
+    width: 8px;
+    .sidebar-user-profile-picture{
+        margin-left: 10px;
+    }
+}
+
+.patient-sidebar-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 4px;
+}
+
+.patient-sidebar-container::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+}
+
+/* =========== Logo Section =========== */
+.sidebar-top-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.sidebar-top-logo .logo-img {
+    max-width: 60px;
+    display: block;
+}
+
+.sidebar-top-logo .logo-text h3,
+.sidebar-top-logo .logo-text h5 {
+    color: var(--color-tertiary);
+    margin: 0;
+}
+
+.sidebar-top-logo .logo-text h3 {
+    font-size: 1.4rem;
+}
+
+.sidebar-top-logo .logo-text h5 {
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+/* Default visible logo text */
+.sidebar-top-logo .logo-text {
+    opacity: 1;
+    max-height: 100px; /* enough to show text fully */
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+/* When sidebar collapses */
+.patient-sidebar-container.active .sidebar-top-logo .logo-text {
+    opacity: 0;
+    max-height: 0;
+}
+
+/* =========== Sidebar Content =========== */
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden; /* Added: Ensures content area clips too */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-secondary);
+}
+
+/* =========== User Profile =========== */
+/* ==================== User Profile Name ==================== */
+.patient-sidebar-container.active .sidebar-userprofile-name-container h3 {
+    width: 0;
+    opacity: 0;
+    pointer-events: none; /* prevent interaction when hidden */
+    overflow: hidden;
+    white-space: nowrap;
+    transition: width 0.3s ease, opacity 0.3s ease, margin-left 0.3s ease;
+    margin-left: 0;
+}
+
+.patient-sidebar-container:not(.active) .sidebar-userprofile-name-container h3 {
+    width: auto; /* show full name */
+    opacity: 1;
+    pointer-events: auto;
+    margin-left: 8px;
+    transition: width 0.3s ease, opacity 0.3s ease, margin-left 0.3s ease;
+}
+
+/* ==================== User Profile Image ==================== */
+.patient-sidebar-container.active .sidebar-userprofile-img {
+    width: 65px;
+    height: 65px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.patient-sidebar-container:not(.active) .sidebar-userprofile-img {
+    width: 85px;
+    height: 85px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.sidebar-user-profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0 .2rem 0;
+    margin: 1.5rem .5rem 2.5rem 0;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.sidebar-userprofile-img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--color-tertiary);
+    background-color: #fff;
+}
+
+.sidebar-userprofile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar-userprofile-name-container h3 {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* =========== Sidebar Navigation =========== */
+.sidebar-navigation {
+    width: 100%;
+}
+
+.sidebar-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav-list li {
+    width: 100%;
+}
+
+.sidebar-section-title:first-of-type {
+    margin-top: 0.5rem;
+}
+
+/* =========== Sidebar Buttons =========== */
+
+/* =========== Logout Button =========== */
+.sidebar-logout {
+    margin-top: auto;
+    width: 100%;
+    margin-bottom: 1rem !important;
+}
+
+.sidebar-logout-btn {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.sidebar-logout-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    font-weight: 550;
+}

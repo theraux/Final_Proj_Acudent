@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Appointments Calendar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* Optional basic styling for calendar cells */
+    .admin-calendar-days {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 1rem;
+      min-height: 80px;
+      border-radius: 6px;
+      background-color: #fff;
+      transition: background 0.3s ease;
+    }
+
+    .admin-calendar-days:hover {
+      background-color: #f8f9fa;
+    }
+
+    .admin-appointment-title h2 {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .calendar-header {
+      background-color: #f1f1f1;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 0.75rem 0;
+    }
+
+    body {
+      background-color: #fafafa;
+      padding: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="admin-calendar-appointment-section" id="admin-calendar-appointments-section">
+    <div class="admin-calendar-appointments-wrapper container-fluid">
+      <!-- Title -->
+      <div class="admin-appointment-title">
+        <h2>Appointments</h2>
+      </div>
+
+      <!-- Calendar Header (Days of the Week) -->
+      <div class="row row-cols-7 text-center calendar-header mb-2">
+        <div class="col">Sun</div>
+        <div class="col">Mon</div>
+        <div class="col">Tue</div>
+        <div class="col">Wed</div>
+        <div class="col">Thu</div>
+        <div class="col">Fri</div>
+        <div class="col">Sat</div>
+      </div>
+
+      <!-- Calendar Days -->
+      <div class="row row-cols-7 text-center" id="calendar-days">
+        <!-- Days will be inserted dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // === Auto-generate days for current month ===
+    const calendarDays = document.getElementById("calendar-days");
+
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0 = Jan
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+
+    const firstDayIndex = firstDay.getDay(); // Sunday = 0
+    const totalDays = lastDay.getDate();
+
+    // Empty cells before the first day (for alignment)
+    for (let i = 0; i < firstDayIndex; i++) {
+      calendarDays.innerHTML += `<div class="col"><div class="admin-calendar-days empty"></div></div>`;
+    }
+
+    // Actual days
+    for (let day = 1; day <= totalDays; day++) {
+      calendarDays.innerHTML += `
+        <div class="col">
+          <div class="admin-calendar-days">
+            <p>${day}</p>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

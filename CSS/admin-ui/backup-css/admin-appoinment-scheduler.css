@@ -1,0 +1,204 @@
+body{
+  overflow-x: hidden;
+}
+
+.admin-appointment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(3.75rem, 10vw, 15rem);
+  width: 80%;
+}
+
+.today-appointment {
+  border: 1px solid #502C00;
+  border-radius: 30px;
+  padding: clamp(0.75rem, 1vw, 1rem);
+  width: 30%;
+  text-align: center;
+  margin-left: 30vw;
+  margin-bottom: 3%;
+}
+
+.today-appointment h3 {
+  color: #502C00;
+}
+
+/* Remove header borders */
+.admin-appointment-type thead th {
+  border: none !important;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* Style only the data cells */
+.admin-appointment-type tbody td {
+  border: 1px solid #502C00; /* brown border */
+  padding: 1.2rem;
+  margin: 0;
+  gap: 0;
+  text-align: center;
+}
+
+.admin-appointment-type tbody {
+  border-radius: 2rem;
+}
+
+.admin-appointment-type {
+  border-collapse: separate; /* allow rounded corners */
+  border-spacing: 0 10px; /* creates space between rows */
+  overflow: hidden;
+  margin-left: 40vw;
+  width: 80%;
+}
+
+/* Round first and last cell of first row */
+.admin-appointment-type tbody tr:first-child td:first-child {
+  border-top-left-radius: 15px;
+}
+
+.admin-appointment-type tbody tr:first-child td:last-child {
+  border-top-right-radius: 15px;
+}
+
+/* Round first and last cell of last row */
+.admin-appointment-type tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+.admin-appointment-type tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+/* Remove left border for all cells except the first one */
+.admin-appointment-type tbody td:not(:first-child) {
+  border-left: none;
+}
+
+.admin-appointment-type tbody td:not(:last-child) {
+  border-right: none;
+}
+
+/* --- Media Queries for responsiveness --- */
+
+/* For devices with width less than or equal to 1200px (tablets and smaller desktops) */
+@media (max-width: 1200px) {
+  .today-appointment {
+    width: 50%; /* Increase the width on medium-sized screens */
+    margin-left: 20vw; /* Adjust centering */
+  }
+
+  .admin-appointment-type {
+    margin-left: 10vw; /* Adjust left margin */
+    width: 90%; /* Increase width on medium-sized screens */
+  }
+
+  .admin-appointment-type thead th {
+    font-size: 1.1rem; /* Adjust font size */
+  }
+
+  .admin-appointment-type tbody td {
+    padding: 1rem; /* Reduce padding for medium screens */
+  }
+
+  .today-appointment h3 {
+    font-size: 1.5rem; /* Adjust header font size */
+  }
+}
+
+/* For devices with width less than or equal to 768px (tablets and smaller screens) */
+@media (max-width: 768px) {
+  .admin-appointment {
+    width: 90%; /* Take 90% width on smaller screens */
+    margin-top: clamp(3.75rem, 8vw, 10rem); /* Adjust the margin */
+  }
+
+  .today-appointment {
+    width: 70%; /* Increase width for smaller screens */
+    margin-left: 0; /* Remove left margin */
+    margin-bottom: 2%;
+  }
+
+  .admin-appointment-type {
+    width: 100%; /* Take full width */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .admin-appointment-type thead th {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .admin-appointment-type tbody td {
+    padding: 0.9rem; /* Reduce padding */
+  }
+
+  .today-appointment h3 {
+    font-size: 1.2rem; /* Adjust header font size */
+  }
+}
+
+/* For devices with width less than or equal to 480px (mobile devices) */
+@media (max-width: 480px) {
+  .admin-appointment {
+    width: 100%; /* Full width on mobile */
+    margin-top: clamp(3.75rem, 6vw, 8rem); /* Adjust the margin */
+  }
+
+  .today-appointment {
+    width: 90%; /* Maximize width on small screens */
+    margin-left: 0; /* Remove left margin */
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-appointment-type {
+    width: 100%; /* Full width */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .admin-appointment-type thead th {
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  .admin-appointment-type tbody td {
+    padding: 0.8rem; /* Reduce padding for mobile */
+  }
+
+  .today-appointment h3 {
+    font-size: 1rem; /* Smaller header font size */
+  }
+}
+
+@media (max-width: 375px) {
+  .admin-appointment{
+    width: 100%;
+    margin-top: clamp(10rem, 4vw, 6rem);
+  }
+
+  .today-appointment{
+    width: 90%;
+    margin-left: 0%;
+ 
+  }
+
+  .admin-appointment-type {
+    width: 100%; /* Full width */
+    margin-left: 0; /* Remove left margin */
+  }
+  .admin-appointment-type thead th {
+    font-size: 0.8rem; /* Smaller font size */
+  }
+ .admin-appointment-type thead th {
+    margin-bottom: 2rem !important; 
+ }
+  .admin-appointment-type tbody td {
+    padding: 0.8rem; /* Reduce padding for mobile */
+    font-size: 0.6rem;
+    
+  }
+
+  .today-appointment h3 {
+    font-size: 1rem; /* Smaller header font size */
+  }
+
+}

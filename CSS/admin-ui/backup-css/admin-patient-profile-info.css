@@ -1,0 +1,124 @@
+body{
+    font-family: "Montserrat", sans-serif;
+}
+.admin-patientprofiles-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(2rem, 10vw, 12rem);
+    width: 80%;
+}
+.patientprofile-info{
+    margin-left: 30vw;
+    width: 30%;
+    border: 1px solid #502C00;
+    border-radius: 30px;
+    padding: clamp(0.75rem, 1vw, 1rem);
+    color: #502C00;
+    text-align: center;
+
+}
+.admin-patient-info {
+    display: flex;
+    flex-direction: row; /* <-- change from column to row */
+    justify-content: center; /* horizontally center the two boxes */
+    gap: 2rem; /* space between the two boxes */
+    width: 80%; 
+    margin-left: 30vw;
+}
+.admin-patient-general-info,
+.admin-patient-anamnesia {
+    border: 1px solid #502C00;
+    color: #502C00;
+    padding: clamp(0.75rem, 1vw, 1rem);
+    width: 45%; /* or any value that fits your layout */
+    box-sizing: border-box; /* includes padding and border in width */
+    margin-top: clamp(2rem, 10vw, 3rem);
+    cursor: pointer;
+}
+.admin-patient-general-info,
+.admin-patient-anamnesia h3{
+    text-align: center;
+}
+.admin-patient-general-info p{
+    text-align: left;
+    font-size: 1.2rem;
+}
+.admin-patient-anamnesia p{
+    font-size: 1.2rem;
+}
+
+/* Search Wrapper */
+.search-wrapper-patient-info {  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 750px;
+  margin-top: clamp(2rem, 10vw, 3rem);
+}
+.search-wrapper-patient-info h3{
+    color: #502C00;
+}
+
+.search-bar {
+  position: relative;
+  left: 618px;
+}
+.search-wrapper-patient-info input {
+  border: 1px solid #502C00;
+  border-radius: 20px;
+  padding: 15px 12px 15px 35px; /* Padding on the left for space for the icon */
+  flex-grow: 1;
+}
+
+.search-wrapper-patient-info i {
+  position: absolute;
+  left: 200px; 
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  font-size: 1.5rem;
+  pointer-events: none; 
+}
+.search-wrapper-patient-info h3{
+    gap: 300px;
+}
+
+
+/* Remove header borders */
+.admin-patient-history-logs thead th {
+  border: 1px solid #502C00;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: #502C00;
+  background-color: #FEF3E7;
+}
+
+/* Style only the data cells */
+.admin-patient-history-logs tbody td {
+  border: 1px solid #502C00; /* brown border */
+  padding: 1.2rem;
+  margin: 0;
+  gap: 0;
+  text-align: center;
+  cursor: pointer;
+  
+}
+
+.admin-patient-history-logs tbody {
+  border-radius: 2rem;
+}
+
+.admin-patient-history-logs {
+  margin-top: 1.5rem;
+  border-spacing: 0 10px; /* creates space between rows */
+  overflow: hidden;
+  margin-left: 30vw;
+  width: 80%;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, .2 );
+}
+
+.admin-patient-history-logs thead th i{
+    font-size: 12px;
+    margin-left: 5px;
+}

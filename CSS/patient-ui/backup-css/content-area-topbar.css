@@ -1,0 +1,130 @@
+
+/* =============Patient Main Content Container==================== */
+
+/* ---------------Main Content Containeer Topbar----------------- */
+.user-patient-topbar {
+  position: absolute;
+  top: 0;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 10px;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  color: var(--color-text);
+  position: sticky;
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 1000;
+background-color: var(--color-secondary);
+}
+
+.user-patient-topbar.active {
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+/* --------------TopBar Left Side------------------- */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+.topbar-left h3{
+  margin: 0;
+  font-size: .8rem;
+  font-weight: 450;
+}
+
+.toggle {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.today-date {
+  font-size: 0.8rem;
+  color: var(--color-text);
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.contentarea-topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-patient-topbar-profile-name {
+  font-size: .8rem;
+  color: var(--color-text);
+  margin: 0;
+  font-weight: 500;
+}
+
+.contentarea-topbar-user {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-text);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* prevents shrinking */
+}
+
+.contentarea-topbar-user img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.icon-wrapper {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper i {
+  color: #333;
+  font-size: 1rem;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.icon-wrapper .badge {
+  position: absolute;
+  background-color: var(--color-tertiary);
+  color: white;
+  font-size: 0.65rem;
+  padding: 5px 5px;
+  border-radius: 50%;
+  font-weight: bold;
+  top: -8px;
+  right: -10px;
+  min-width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.icon-wrapper:focus {
+  outline: 1.5px solid var(--color-tertiary);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+

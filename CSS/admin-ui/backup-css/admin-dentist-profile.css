@@ -1,0 +1,151 @@
+.admin-dentistprofile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(2rem, 10vw, 15rem);
+    width: 80%;
+}
+
+.dentist-profile, 
+.staff-profile{
+    width: 30%;
+    margin-bottom: 1rem;
+    border: 1px solid #502C00;
+    border-radius: 30px;
+    text-align: center;
+    padding: clamp(0.75rem, 1vw, 1rem);
+    color: #502C00;
+    margin-left: 30vw;
+}
+
+.dentist-box-container,
+.staff-box-container {
+    margin-left: 35vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25%, 300px), 1fr));
+    gap: 1rem;
+    width: 80%;
+}
+
+
+.dentist-profile-box{
+    position: relative;
+    border: 1px solid #502C00;
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    text-align: center;
+    height: 350px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.dentist-profile-box::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;      
+    right: 0;  
+    width: 20px;
+    background-color: #F5E3CD;
+    border: 1px solid #502C00;
+}
+
+/* Search Wrapper */
+.search-wrapper-dentist {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  left: 800px;
+}
+
+.search-wrapper-dentist input {
+  border: 1px solid #502C00;
+  border-radius: 20px;
+  padding: 15px 12px 15px 35px; /* Padding on the left for space for the icon */
+  flex-grow: 1;
+}
+
+.search-wrapper-dentist i {
+  position: absolute;
+  left: 200px; /* Position the icon inside the input field on the left side */
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  font-size: 1.5rem;
+  pointer-events: none; 
+}
+
+.button-for-dentist{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 80%;
+    justify-content: center;
+    left: 800px;   
+}
+.button-for-dentist .add-dentist,
+.button-for-dentist .dentist-report,
+.button-for-staff .add-staff{
+    padding: clamp(1rem, 1vw, 1rem);
+    border: 1px solid #502C00;
+    border-radius: 4px;
+    width: 10%;
+    color: #502C00;
+    background-color: #fff;
+}
+.button-for-dentist .add-dentist:hover,
+.button-for-dentist .dentist-report:hover,
+.button-for-staff .add-staff:hover{
+    background-color: #F5E3CD;
+}
+
+
+
+/* FOR STAFF PROFILE */
+.admin-staff-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(2rem, 10vw, 5rem);
+    width: 80%;
+}
+
+
+.staff-profile-box{
+    position: relative;
+    border: 1px solid #502C00;
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    text-align: center;
+    height: 350px;
+    z-index: 1;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.staff-profile-box::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;      
+    right: 0;  
+    width: 20px;
+    background-color: #F5E3CD;
+    border: 1px solid #502C00;
+}
+.button-for-staff{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 80%;
+    justify-content: center;
+    left: 750px;   
+}

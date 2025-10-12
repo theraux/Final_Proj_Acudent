@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information Record - Dental Dashboard</title>
+    <style>
+        /* Basic Reset and Layout */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 20px; }
+        h1, h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .section { margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #555; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 80px; resize: vertical; }
+        button { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #2980b9; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: var(--color-tertiary, #e74c3c); display: inline-block; margin-right: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); } /* From your previous CSS */
+        .attachments { display: flex; flex-wrap: wrap; gap: 10px; }
+        .attachment { border: 1px solid #ddd; padding: 10px; border-radius: 4px; background: #f9f9f9; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Information Record</h1>
+        
+        <!-- Profile Section -->
+        <div class="section">
+            <h2>Profile Overview</h2>
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <img src="placeholder-profile.jpg" alt="Patient Profile Photo" class="profile-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNFN0NDM0MiLz4KPHRleHQgeD0iNDAiIHk9IjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIj5QYXRpZW50PC90ZXh0Pgo8L3N2Zz4='">
+                <div>
+                    <h3 id="patientName">John Doe</h3>
+                    <p>Patient ID: #12345 | DOB: 01/15/1985 | Last Visit: 2023-10-15</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Details Section -->
+        <div class="section">
+            <h2>Personal Details</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" value="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" value="1985-01-15" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" value="+1 (555) 123-4567" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="john.doe@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" placeholder="Enter full address">123 Dental St, Smile City, SC 12345</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical History Section -->
+        <div class="section">
+            <h2>Medical History</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="allergies">Allergies</label>
+                    <textarea id="allergies" placeholder="List any allergies (e.g., penicillin, latex)">None</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="medConditions">Medical Conditions</label>
+                    <textarea id="medConditions" placeholder="e.g., Diabetes, Hypertension">None</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="medications">Current Medications</label>
+                    <textarea id="medications" placeholder="List medications and dosages">None</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="emergencyContact">Emergency Contact</label>
+                    <input type="text" id="emergencyContact" value="Jane Doe - +1 (555) 987-6543">
+                </div>
+            </div>
+        </div>
+
+        <!-- Dental History Section -->
+        <div class="section">
+            <h2>Dental History</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="lastDentalVisit">Last Dental Visit Date</label>
+                    <input type="date" id="lastDentalVisit" value="2023-10-15">
+                </div>
+                <div class="form-group">
+                    <label for="previousTreatments">Previous Treatments</label>
+                    <textarea id="previousTreatments" placeholder="e.g., Fillings, Root Canal, Braces">Routine cleaning on 2023-05-20</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dentalIssues">Current Dental Issues/Concerns</label>
+                    <textarea id="dentalIssues" placeholder="e.g., Tooth pain, Sensitivity">Toothache in lower right</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="xrayNotes">X-Ray/Imaging Notes</label>
+                    <textarea id="xrayNotes" placeholder="Upload or note recent X-rays">X-ray taken 2023-10-15: No cavities detected</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance Section -->
+        <div class="section">
+            <h2>Insurance Information</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="insuranceProvider">Insurance Provider</label>
+                    <input type="text" id="insuranceProvider" value="DentalCare Inc.">
+                </div>
+                <div class="form-group">
+                    <label for="policyNumber">Policy Number</label>
+                    <input type="text" id="policyNumber" value="DC-789012">
+                </div>
+                <div class="form-group">
+                    <label for="groupNumber">Group Number</label>
+                    <input type="text" id="groupNumber" value="GRP-456">
+                </div>
+                <div class="form-group">
+                    <label for="insuranceNotes">Additional Notes</label>
+                    <textarea id="insuranceNotes" placeholder="Coverage details">100% for cleanings, 80% for fillings</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attachments Section -->
+        <div class="section">
+            <h2>Attachments & Documents</h2>
+            <div class="attachments">
+                <div class="attachment">
+                    <strong>X-Ray 2023-10-15</strong><br>
+                    <a href="#" onclick="viewAttachment('xray-2023.jpg')">View/Download</a>
+                </div>
+                <div class="attachment">
+                    <strong>Consent Form</strong><br>
+                    <a href="#" onclick="viewAttachment('consent.pdf')">View/Download</a>
+                </div>
+                <!-- Add more dynamically if needed -->
+            </div>
+            <div class="form-group">
+                <label for="uploadFile">Upload New Document</label>
+                <input type="file" id="uploadFile" accept="image/*,.pdf" multiple>
+                <button onclick="uploadFile()">Upload</button>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="savePatientInfo()">Save Changes</button>
+            <button onclick="printRecord()" style="margin-left: 10px; background: #95a5a6;">Print Record</button>
+        </div>
+    </div>
+
+    <script>
+        // Load patient data (simulate or fetch from API)
+        function loadPatientData() {
+            // Example: Fetch from backend
+            // fetch('/api/patient/12345').then(res => res.json()).then(data => { populate form });
+            // For demo, use hardcoded values (already set in HTML)
+            document.getElementById('patientName').textContent = 'John Doe'; // Dynamic if needed
+        }
+
+        // Save changes via AJAX
+        function savePatientInfo() {
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                dob: document.getElementById('dob').value,
+                // Add all fields...
+                allergies: document.getElementById('allergies').value,
+                // ... etc.
+            };
+            fetch('/api/update-patient', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: '12345', ...formData })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert('Patient information saved successfully!');
+                console.log('Saved:', data);
+            })
+            .catch(err => {
+                console.error('Error saving:', err);
+                alert('Error saving information. Please try again.');
+            });
+        }
+
+        // Placeholder functions
+        function viewAttachment(file) {
+            alert(`Viewing: ${file}`); // Replace with modal or download
+            // window.open(file, '_blank');
+        }
+
+        function uploadFile() {
+            const fileInput = document.getElementById('uploadFile');
+            if (fileInput.files.length > 0) {
+                const formData = new FormData();
+                for (let file of fileInput.files) {
+                    formData.append('files', file);
+                }
+                fetch('/api/upload-patient-docs', { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    alert('Files uploaded!');
+                    // Refresh attachments list
+                })
+                .catch(err => console.error('Upload error:', err));
+            }
+        }
+
+        function printRecord() {
+            window.print(); // Basic print; customize with CSS @media print
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', loadPatientData);
+    </script>
+</body>
+</html>

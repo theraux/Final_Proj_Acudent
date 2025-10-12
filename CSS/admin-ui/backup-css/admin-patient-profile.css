@@ -1,0 +1,77 @@
+.admin-patient-profiles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(2rem, 10vw, 15rem);
+    width: 80%;
+
+}
+
+.patient-profile {
+    width: 30%;
+    margin-bottom: 1rem;
+    border: 1px solid #502C00;
+    border-radius: 30px;
+    text-align: center;
+    padding: clamp(0.75rem, 1vw, 1rem);
+    color: #502C00;
+    margin-left: 30vw;
+}
+
+.patient-profile-box-container {
+    margin-left: 35vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 25%, 300px), 1fr));
+    gap: 1rem;
+    width: 80%;
+}
+
+
+.patient-profile-box {
+    position: relative;
+    border: 1px solid #502C00;
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    text-align: center;
+    height: 350px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.patient-profile-box::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;      
+    right: 0;  
+    width: 20px;
+    background-color: #F5E3CD;
+    border: 1px solid #502C00;
+}
+
+/* Search Wrapper */
+.search-wrapper-patient {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  left: 800px;
+}
+
+.search-wrapper-patient input {
+  border: 1px solid #502C00;
+  border-radius: 20px;
+  padding: 15px 12px 15px 35px; /* Padding on the left for space for the icon */
+  flex-grow: 1;
+}
+
+.search-wrapper-patient i {
+  position: absolute;
+  left: 200px; /* Position the icon inside the input field on the left side */
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  font-size: 1.5rem;
+  pointer-events: none; 
+}

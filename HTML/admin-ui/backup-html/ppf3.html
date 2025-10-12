@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Dental MIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'beige-50': '#faf8f5',
+                        'beige-100': '#f5f1ea',
+                        'beige-200': '#ebe3d5',
+                        'brown-100': '#e8ddd4',
+                        'brown-200': '#d4c4b0',
+                        'brown-300': '#b8a082',
+                        'brown-400': '#9c7c54',
+                        'brown-500': '#8b6914',
+                        'brown-600': '#7a5a12',
+                        'brown-700': '#6b4e10'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .profile-shadow {
+            box-shadow: 0 4px 6px -1px rgba(139, 105, 20, 0.1), 0 2px 4px -1px rgba(139, 105, 20, 0.06);
+        }
+        .sidebar {
+            width: 256px;
+            transition: width 0.3s ease-in-out;
+        }
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        .main-content {
+            margin-left: 256px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .main-content.collapsed {
+            margin-left: 80px;
+        }
+        .sidebar-text {
+            opacity: 1;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .sidebar.collapsed .sidebar-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item .tooltip {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #374151;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+            margin-left: 10px;
+        }
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-right-color: #374151;
+        }
+        .sidebar.collapsed .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .account-section {
+            transition: all 0.3s ease-in-out;
+        }
+        .sidebar.collapsed .account-section {
+            padding: 16px 8px;
+        }
+        .sidebar.collapsed .account-info {
+            display: none;
+        }
+        .sidebar.collapsed .account-button {
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+        }
+        .account-button {
+            transition: all 0.3s ease-in-out;
+        }
+        .sidebar.collapsed .account-button .sidebar-text {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 min-h-full">
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-brown-200 profile-shadow fixed w-full top-0 z-30">
+        <div class="flex justify-between items-center h-16 px-6">
+            <div class="flex items-center">
+                <button onclick="toggleSidebar()" class="text-brown-600 hover:text-brown-700 mr-4 p-2 rounded-md hover:bg-beige-100 transition-colors">
+                    <span id="toggleIcon">☰</span>
+                </button>
+                <button onclick="goToDashboard()" class="text-brown-600 hover:text-brown-700 mr-4">
+                    ← Back to Dashboard
+                </button>
+                <h1 class="text-2xl font-bold text-brown-700">🦷 DentalMIS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-brown-200 rounded-full flex items-center justify-center">
+                        <span class="text-sm text-brown-600">👤</span>
+                    </div>
+                    <span class="text-brown-700 font-medium">Sarah Johnson</span>
+                </div>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm relative">
+                    🔔
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </button>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar bg-white border-r border-brown-200 profile-shadow fixed h-full overflow-y-auto">
+            <nav class="p-4 space-y-2">
+                <!-- My Account Section -->
+                <div class="account-section bg-gradient-to-br from-brown-100 to-beige-100 rounded-lg p-4 mb-4">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="w-10 h-10 bg-brown-500 rounded-full flex items-center justify-center profile-shadow flex-shrink-0">
+                            <span class="text-white font-bold">SJ</span>
+                        </div>
+                        <div class="account-info sidebar-text">
+                            <h3 class="font-semibold text-brown-700 text-sm">Sarah Johnson</h3>
+                            <p class="text-brown-600 text-xs">Patient ID: #12345</p>
+                        </div>
+                    </div>
+                    <button class="account-button w-full bg-brown-500 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center space-x-2">
+                        <span>⚙️</span>
+                        <span class="sidebar-text">My Account</span>
+                    </button>
+                </div>
+
+                <a href="#" onclick="goToDashboard()" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">📊</span>
+                    <span class="sidebar-text">Dashboard</span>
+                    <div class="tooltip">Dashboard</div>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">📅</span>
+                    <span class="sidebar-text">Appointments</span>
+                    <div class="tooltip">Appointments</div>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">🦷</span>
+                    <span class="sidebar-text">Treatment History</span>
+                    <div class="tooltip">Treatment History</div>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">💰</span>
+                    <span class="sidebar-text">Billing</span>
+                    <div class="tooltip">Billing</div>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">📋</span>
+                    <span class="sidebar-text">Medical Records</span>
+                    <div class="tooltip">Medical Records</div>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span class="flex-shrink-0">📞</span>
+                    <span class="sidebar-text">Support</span>
+                    <div class="tooltip">Support</div>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="mainContent" class="main-content flex-1 p-8">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold text-brown-700">My Account</h2>
+                        <p class="mt-2 text-brown-600">Manage your personal information and account settings</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-16 h-16 bg-brown-500 rounded-full flex items-center justify-center profile-shadow">
+                            <span class="text-white font-bold text-xl">SJ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Picture Section -->
+            <div class="bg-white rounded-lg profile-shadow mb-8">
+                <div class="p-6 border-b border-brown-200">
+                    <h3 class="text-lg font-semibold text-brown-700">Profile Picture</h3>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-24 h-24 bg-brown-500 rounded-full flex items-center justify-center profile-shadow">
+                            <span class="text-white font-bold text-3xl">SJ</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-brown-700 text-lg">Sarah Johnson</h4>
+                            <p class="text-brown-600 mb-4">Patient ID: #12345</p>
+                            <div class="flex space-x-3">
+                                <button onclick="uploadPhoto()" class="bg-brown-500 hover:bg-brown-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                                    Upload New Photo
+                                </button>
+                                <button onclick="removePhoto()" class="border border-brown-300 text-brown-700 hover:bg-beige-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                                    Remove Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Overview Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-blue-600 text-xl">📅</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-brown-700">Next Appointment</h3>
+                            <p class="text-brown-600 text-sm">Jan 15, 2024 at 2:00 PM</p>
+                            <p class="text-brown-500 text-xs">Cleaning & Checkup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-green-600 text-xl">💰</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-brown-700">Insurance Coverage</h3>
+                            <p class="text-brown-600 text-sm">$750 remaining</p>
+                            <p class="text-brown-500 text-xs">Blue Cross Blue Shield</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-purple-600 text-xl">🦷</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-brown-700">Treatment Plan</h3>
+                            <p class="text-brown-600 text-sm">2 treatments pending</p>
+                            <p class="text-brown-500 text-xs">Crown & Filling</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Sections -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Personal Information -->
+                <div class="bg-white rounded-lg profile-shadow">
+                    <div class="p-6 border-b border-brown-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-brown-700">Personal Information</h3>
+                            <button onclick="editPersonalInfo()" class="text-brown-500 hover:text-brown-600 text-sm">Edit</button>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">First Name</label>
+                                <p class="text-brown-700">Sarah</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Last Name</label>
+                                <p class="text-brown-700">Johnson</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Date of Birth</label>
+                                <p class="text-brown-700">March 15, 1985</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Gender</label>
+                                <p class="text-brown-700">Female</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-brown-600">Emergency Contact</label>
+                            <p class="text-brown-700">Michael Johnson - (555) 987-6543</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="bg-white rounded-lg profile-shadow">
+                    <div class="p-6 border-b border-brown-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-brown-700">Contact Information</h3>
+                            <button onclick="editContactInfo()" class="text-brown-500 hover:text-brown-600 text-sm">Edit</button>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-brown-600">Email</label>
+                            <p class="text-brown-700">sarah.johnson@email.com</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Primary Phone</label>
+                                <p class="text-brown-700">(555) 123-4567</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Secondary Phone</label>
+                                <p class="text-brown-700">(555) 234-5678</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-brown-600">Address</label>
+                            <p class="text-brown-700">123 Oak Street<br>Springfield, IL 62701</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insurance Information -->
+                <div class="bg-white rounded-lg profile-shadow">
+                    <div class="p-6 border-b border-brown-200">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-brown-700">Insurance Information</h3>
+                            <button onclick="editInsuranceInfo()" class="text-brown-500 hover:text-brown-600 text-sm">Edit</button>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                            <div class="flex items-center">
+                                <span class="text-green-600 mr-2">✅</span>
+                                <span class="text-green-800 text-sm font-medium">Insurance Verified</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Provider</label>
+                                <p class="text-brown-700">Blue Cross Blue Shield</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-brown-600">Member ID</label>
+                                <p class="text-brown-700">MEM987654321</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <p class="text-blue-700 font-medium">Annual Max</p>
+                                    <p class="text-blue-600">$2,000</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-blue-700 font-medium">Used</p>
+                                    <p class="text-blue-600">$1,250</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-blue-700 font-medium">Remaining</p>
+                                    <p class="text-blue-600">$750</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="bg-white rounded-lg profile-shadow">
+                    <div class="p-6 border-b border-brown-200">
+                        <h3 class="text-lg font-semibold text-brown-700">Account Settings</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-brown-700">Email Notifications</p>
+                                <p class="text-brown-600 text-sm">Appointment reminders and updates</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brown-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-500"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-brown-700">SMS Reminders</p>
+                                <p class="text-brown-600 text-sm">Text message appointment reminders</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brown-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brown-500"></div>
+                            </label>
+                        </div>
+                        <div class="pt-4 border-t border-brown-200">
+                            <button onclick="changePassword()" class="w-full bg-brown-500 hover:bg-brown-600 text-white px-4 py-2 rounded-md font-medium transition-colors mb-3">
+                                Change Password
+                            </button>
+                            <button onclick="downloadData()" class="w-full border border-brown-300 text-brown-700 hover:bg-beige-50 px-4 py-2 rounded-md font-medium transition-colors">
+                                Download My Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+            
+            // Change toggle icon
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.textContent = '→';
+            } else {
+                toggleIcon.textContent = '☰';
+            }
+        }
+
+        function goToDashboard() {
+            showNotification('Returning to dashboard...');
+        }
+
+        function editPersonalInfo() {
+            showNotification('Opening personal information editor...');
+        }
+
+        function editContactInfo() {
+            showNotification('Opening contact information editor...');
+        }
+
+        function editInsuranceInfo() {
+            showNotification('Opening insurance information editor...');
+        }
+
+        function changePassword() {
+            showNotification('Opening password change form...');
+        }
+
+        function downloadData() {
+            showNotification('Preparing your data download...');
+        }
+
+        function uploadPhoto() {
+            showNotification('Opening photo upload dialog...');
+        }
+
+        function removePhoto() {
+            if (confirm('Are you sure you want to remove your profile photo?')) {
+                showNotification('Profile photo removed successfully!');
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98caa90d603ebc40',t:'MTc2MDE0Njk0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Dental MIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'beige-50': '#faf8f5',
+                        'beige-100': '#f5f1ea',
+                        'beige-200': '#ebe3d5',
+                        'brown-100': '#e8ddd4',
+                        'brown-200': '#d4c4b0',
+                        'brown-300': '#b8a082',
+                        'brown-400': '#9c7c54',
+                        'brown-500': '#8b6914',
+                        'brown-600': '#7a5a12',
+                        'brown-700': '#6b4e10'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .profile-shadow {
+            box-shadow: 0 4px 6px -1px rgba(139, 105, 20, 0.1), 0 2px 4px -1px rgba(139, 105, 20, 0.06);
+        }
+        .progress-bar {
+            transition: width 0.3s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            height: 200px;
+        }
+        .chart-bar {
+            transition: height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 min-h-full">
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-brown-200 profile-shadow fixed w-full top-0 z-30">
+        <div class="flex justify-between items-center h-16 px-6">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-brown-700">🦷 DentalMIS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-brown-200 rounded-full flex items-center justify-center">
+                        <span class="text-sm text-brown-600">👤</span>
+                    </div>
+                    <span class="text-brown-700 font-medium">Sarah Johnson</span>
+                </div>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm relative">
+                    🔔
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </button>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-brown-200 profile-shadow fixed h-full overflow-y-auto">
+            <nav class="p-4 space-y-2">
+                <a href="#" class="flex items-center space-x-3 bg-brown-100 text-brown-700 px-3 py-2 rounded-md font-medium">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📅</span>
+                    <span>Appointments</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>🦷</span>
+                    <span>Treatment History</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>💰</span>
+                    <span>Billing</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📋</span>
+                    <span>Medical Records</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>⚙️</span>
+                    <span>My Account</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📞</span>
+                    <span>Support</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-6">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold text-brown-700">Welcome back, Sarah! 👋</h2>
+                        <p class="mt-2 text-brown-600">Here's your dental health overview for today</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-brown-600 text-sm">Today's Date</p>
+                        <p class="text-brown-700 font-semibold" id="currentDate">January 8, 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg profile-shadow p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <span class="text-2xl">📅</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Next Appointment</p>
+                            <p class="text-lg font-bold text-brown-700">Jan 15</p>
+                            <p class="text-xs text-brown-500">in 7 days</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg profile-shadow p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-full">
+                            <span class="text-2xl">🦷</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Treatments</p>
+                            <p class="text-lg font-bold text-brown-700">15 Total</p>
+                            <p class="text-xs text-green-600">2 in progress</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg profile-shadow p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-yellow-100 rounded-full">
+                            <span class="text-2xl">💰</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Outstanding</p>
+                            <p class="text-lg font-bold text-brown-700">$125.00</p>
+                            <p class="text-xs text-yellow-600">1 pending</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg profile-shadow p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-full">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Health Score</p>
+                            <p class="text-lg font-bold text-brown-700">92%</p>
+                            <p class="text-xs text-green-600">Excellent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-lg profile-shadow p-6 mb-8">
+                <h3 class="text-lg font-semibold text-brown-700 mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button onclick="bookAppointment()" class="flex flex-col items-center p-4 border border-brown-200 rounded-lg hover:bg-beige-50 transition-colors">
+                        <span class="text-2xl mb-2">📅</span>
+                        <span class="text-sm font-medium text-brown-700">Book Appointment</span>
+                    </button>
+                    <button onclick="viewTreatments()" class="flex flex-col items-center p-4 border border-brown-200 rounded-lg hover:bg-beige-50 transition-colors">
+                        <span class="text-2xl mb-2">🦷</span>
+                        <span class="text-sm font-medium text-brown-700">View Treatments</span>
+                    </button>
+                    <button onclick="payBill()" class="flex flex-col items-center p-4 border border-brown-200 rounded-lg hover:bg-beige-50 transition-colors">
+                        <span class="text-2xl mb-2">💳</span>
+                        <span class="text-sm font-medium text-brown-700">Pay Bill</span>
+                    </button>
+                    <button onclick="contactOffice()" class="flex flex-col items-center p-4 border border-brown-200 rounded-lg hover:bg-beige-50 transition-colors">
+                        <span class="text-2xl mb-2">📞</span>
+                        <span class="text-sm font-medium text-brown-700">Contact Office</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Upcoming Appointments -->
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-brown-700">Upcoming Appointments</h3>
+                        <button onclick="viewAllAppointments()" class="text-brown-500 hover:text-brown-700 text-sm">View All</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-beige-50 rounded-lg">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">🦷</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-brown-700">Routine Cleaning</h4>
+                                <p class="text-brown-600 text-sm">January 15, 2024 at 10:00 AM</p>
+                                <p class="text-brown-500 text-xs">Dr. Smith</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Confirmed</span>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-beige-50 rounded-lg">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">🔍</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-brown-700">Root Canal Treatment</h4>
+                                <p class="text-brown-600 text-sm">January 22, 2024 at 2:00 PM</p>
+                                <p class="text-brown-500 text-xs">Dr. Wilson</p>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Scheduled</span>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-beige-50 rounded-lg">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl">✅</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-medium text-brown-700">Follow-up Checkup</h4>
+                                <p class="text-brown-600 text-sm">January 30, 2024 at 11:30 AM</p>
+                                <p class="text-brown-500 text-xs">Dr. Smith</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Treatment Progress -->
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-brown-700">Treatment Progress</h3>
+                        <button onclick="viewTreatmentHistory()" class="text-brown-500 hover:text-brown-700 text-sm">View History</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border border-brown-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium text-brown-700">Crown Treatment - Tooth #19</h4>
+                                <span class="text-brown-600 text-sm">75%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full progress-bar" style="width: 75%"></div>
+                            </div>
+                            <p class="text-brown-600 text-sm mt-2">Next: Crown installation on Jan 15</p>
+                        </div>
+
+                        <div class="border border-brown-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium text-brown-700">Root Canal - Tooth #30</h4>
+                                <span class="text-brown-600 text-sm">25%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full progress-bar" style="width: 25%"></div>
+                            </div>
+                            <p class="text-brown-600 text-sm mt-2">Scheduled for Jan 22</p>
+                        </div>
+
+                        <div class="border border-brown-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium text-brown-700">Orthodontic Treatment</h4>
+                                <span class="text-brown-600 text-sm">60%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full progress-bar" style="width: 60%"></div>
+                            </div>
+                            <p class="text-brown-600 text-sm mt-2">8 months remaining</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Recent Activity -->
+                <div class="lg:col-span-2 bg-white rounded-lg profile-shadow p-6">
+                    <h3 class="text-lg font-semibold text-brown-700 mb-4">Recent Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3 p-3 hover:bg-beige-50 rounded-lg transition-colors">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-sm">✅</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-brown-700 font-medium">Dental cleaning completed</p>
+                                <p class="text-brown-600 text-sm">December 15, 2023 • Dr. Smith</p>
+                                <p class="text-brown-500 text-xs">No issues found, excellent oral hygiene</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 hover:bg-beige-50 rounded-lg transition-colors">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-sm">📅</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-brown-700 font-medium">Appointment scheduled</p>
+                                <p class="text-brown-600 text-sm">January 8, 2024 • Root Canal Treatment</p>
+                                <p class="text-brown-500 text-xs">Scheduled for January 22 with Dr. Wilson</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 hover:bg-beige-50 rounded-lg transition-colors">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-sm">💰</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-brown-700 font-medium">Payment received</p>
+                                <p class="text-brown-600 text-sm">December 15, 2023 • $150.00</p>
+                                <p class="text-brown-500 text-xs">Payment for dental cleaning</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 hover:bg-beige-50 rounded-lg transition-colors">
+                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-sm">📋</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-brown-700 font-medium">Medical record updated</p>
+                                <p class="text-brown-600 text-sm">December 10, 2023 • X-ray results</p>
+                                <p class="text-brown-500 text-xs">New X-rays added to your file</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Metrics -->
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <h3 class="text-lg font-semibold text-brown-700 mb-4">Health Metrics</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-brown-600 text-sm">Oral Health Score</span>
+                                <span class="text-brown-700 font-semibold">92%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full progress-bar" style="width: 92%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-brown-600 text-sm">Treatment Compliance</span>
+                                <span class="text-brown-700 font-semibold">88%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full progress-bar" style="width: 88%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-brown-600 text-sm">Appointment Attendance</span>
+                                <span class="text-brown-700 font-semibold">95%</span>
+                            </div>
+                            <div class="w-full bg-brown-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full progress-bar" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-3 rounded-lg">
+                            <h4 class="font-medium text-green-800 mb-1">🎉 Great Job!</h4>
+                            <p class="text-green-700 text-sm">You're maintaining excellent oral health. Keep up the good work!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Summary and Reminders -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Billing Summary -->
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-brown-700">Billing Summary</h3>
+                        <button onclick="viewBilling()" class="text-brown-500 hover:text-brown-700 text-sm">View Details</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-beige-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-brown-700">Outstanding Balance</p>
+                                <p class="text-brown-600 text-sm">Due by January 30, 2024</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xl font-bold text-red-600">$125.00</p>
+                                <button onclick="payNow()" class="text-brown-500 hover:text-brown-700 text-sm">Pay Now</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-3 bg-green-50 rounded-lg">
+                                <p class="text-2xl font-bold text-green-700">$2,450</p>
+                                <p class="text-green-600 text-sm">Total Paid (2023)</p>
+                            </div>
+                            <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                <p class="text-2xl font-bold text-blue-700">$1,850</p>
+                                <p class="text-blue-600 text-sm">Insurance Covered</p>
+                            </div>
+                        </div>
+
+                        <div class="chart-container bg-beige-50 rounded-lg p-4">
+                            <h4 class="font-medium text-brown-700 mb-3">Monthly Expenses (2023)</h4>
+                            <div class="flex items-end justify-between h-32 space-x-2">
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 60%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">Jan</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 40%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">Feb</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 80%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">Mar</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 30%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">Apr</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 70%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">May</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="chart-bar bg-blue-500 w-6 rounded-t" style="height: 50%"></div>
+                                    <span class="text-xs text-brown-600 mt-1">Jun</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reminders & Tips -->
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <h3 class="text-lg font-semibold text-brown-700 mb-4">Reminders & Tips</h3>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                            <div class="flex items-center mb-2">
+                                <span class="text-lg mr-2">💊</span>
+                                <h4 class="font-medium text-blue-800">Pre-treatment Medication</h4>
+                            </div>
+                            <p class="text-blue-700 text-sm">Take prescribed antibiotics 3 days before your root canal appointment on January 22.</p>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                            <div class="flex items-center mb-2">
+                                <span class="text-lg mr-2">🦷</span>
+                                <h4 class="font-medium text-yellow-800">Oral Care Tip</h4>
+                            </div>
+                            <p class="text-yellow-700 text-sm">Remember to floss daily and use fluoride mouthwash to maintain your excellent oral health.</p>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                            <div class="flex items-center mb-2">
+                                <span class="text-lg mr-2">📅</span>
+                                <h4 class="font-medium text-green-800">Upcoming Cleaning</h4>
+                            </div>
+                            <p class="text-green-700 text-sm">Your next routine cleaning is scheduled for January 15. Arrive 15 minutes early for check-in.</p>
+                        </div>
+
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
+                            <div class="flex items-center mb-2">
+                                <span class="text-lg mr-2">🏆</span>
+                                <h4 class="font-medium text-purple-800">Achievement</h4>
+                            </div>
+                            <p class="text-purple-700 text-sm">Congratulations! You've maintained perfect appointment attendance for 6 months.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Quick action functions
+        function bookAppointment() {
+            showNotification('Redirecting to appointment booking...');
+        }
+
+        function viewTreatments() {
+            showNotification('Opening treatment history...');
+        }
+
+        function payBill() {
+            showNotification('Opening billing and payment options...');
+        }
+
+        function contactOffice() {
+            showNotification('Opening contact information...');
+        }
+
+        function viewAllAppointments() {
+            showNotification('Opening appointments page...');
+        }
+
+        function viewTreatmentHistory() {
+            showNotification('Opening treatment history...');
+        }
+
+        function viewBilling() {
+            showNotification('Opening billing details...');
+        }
+
+        function payNow() {
+            showNotification('Opening payment portal...');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+
+            // Animate chart bars
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach((bar, index) => {
+                const height = bar.style.height;
+                bar.style.height = '0%';
+                setTimeout(() => {
+                    bar.style.height = height;
+                }, 800 + (index * 100));
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98b6fa6d617db9fb',t:'MTc1OTk0MDU1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

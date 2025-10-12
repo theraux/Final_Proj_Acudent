@@ -1,0 +1,361 @@
+
+    /* ==========User Patient Sidebar ========== */
+
+    /* ----------- Sidebar Container -----------  */
+    .patient-sidebar-container {
+        width: 250px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        top: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-bottom-right-radius: 5px;
+        box-shadow: 1px 0 5px rgba(0, 0, 0, 0.15);
+        position: absolute;
+        transition: width 0.3s ease;
+        box-sizing: border-box;
+        z-index: 1001;
+        background-color: var(--color-secondary);
+    }
+
+    .patient-sidebar-container.active {
+        width: 80px;
+        transition: width 0.3s ease;
+    }
+
+    /* -----------  Sidebar/Logo Header -----------  */
+    .sidebar-top-logo {
+        position: relative; 
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        border-bottom: 3px solid var(--color-primary);
+        padding: 0;
+    }
+    .toggle-sidebar {
+        opacity: 0;
+    }
+
+    .sidebar-top-logo .logo-img {
+        max-width: 60px;
+        margin-right: 8px;
+    }
+
+    .sidebar-top-logo .logo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 1;
+        max-height: 100px;
+        overflow: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+
+    .sidebar-top-logo .logo-text h3,
+    .sidebar-top-logo .logo-text h5 {
+        color: var(--color-tertiary);
+        margin: 0;
+        text-align: center;
+    }
+
+    .sidebar-top-logo .logo-text h3 {
+        font-size: 1.4rem;
+    }
+
+    .sidebar-top-logo .logo-text h5 { 
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+
+    .patient-sidebar-container.active .sidebar-top-logo .logo-text {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    /* -----------  User Profile Name -----------  */
+
+    .sidebar-user-profile-picture {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem 0 1rem 0;
+        margin: 1.5rem .5rem 1rem 0;
+        gap: 0.5rem;
+        border-radius: 5px;
+        background-color: var(--color-primary);
+        width: 90%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar-profile-info-container {
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 5px;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sidebar-userprofile-img {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: var(--color-secondary);
+    }
+
+    .sidebar-userprofile-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .patient-sidebar-container.active .sidebar-userprofile-img {
+        width: 45px;
+        height: 45px;
+        margin-left: 7px;
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .sidebar-userprofile-name-container {
+        max-width: 120px;
+        opacity: 1;
+        transition: max-width 0.3s ease, opacity 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sidebar-userprofile-name-container h3,
+    .sidebar-userprofile-name-container p {
+        margin: 0;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        color: var(--color-text2);
+    }
+
+    .sidebar-userprofile-name-container p {
+        font-size: 0.7rem;
+    }
+
+    .sidebar-userprofile-name-container h3 {
+        font-size: 0.9rem;
+    }
+
+    .patient-sidebar-container:not(.active) .sidebar-userprofile-img {
+        width: 55px;
+        height: 55px;
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .patient-sidebar-container.active .sidebar-userprofile-name-container {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    /* -----------  Sidebar Content -----------  */
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) var(--color-secondary);
+    }
+
+    /* -----------  Sidebar Navigation -----------  */
+    .sidebar-navigation {
+        width: 100%;
+    }
+
+    .sidebar-nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-nav-list li {
+        width: 100%;
+    }
+
+    .sidebar-section-title:first-of-type {
+        margin-top: 0.5rem;
+    }
+
+    /* -----------  Sidebar Titles -----------  */
+    .sidebar-section-title {
+        font-size: 0.55rem;
+        font-weight: 500;
+        color: var(--color-tertiary);
+        text-transform: uppercase;
+        margin: 1.5rem 0 0.5rem 1.2rem;
+        opacity: 1;
+        height: auto;
+        width: auto;
+        margin-left: 8px;
+        overflow: hidden;
+        white-space: nowrap;
+        transition:
+            opacity 0.3s ease,
+            height 0.3s ease,
+            margin-top 0.3s ease,
+            margin-bottom 0.3s ease,
+            margin-left 0.3s ease;
+        display: block;
+        will-change: opacity, height;
+
+        line-height: 1;
+
+    }
+
+    .patient-sidebar-container.active .sidebar-section-title {
+        opacity: 0;
+        height: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        transition:
+            opacity 0.3s ease,
+            height 0.3s ease,
+            margin-top 0.3s ease,
+            margin-bottom 0.3s ease,
+            margin-left 0.3s ease;
+
+    }
+
+    /* -----------  Sidebar Button Styling -----------  */
+    .btn-my-account {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        color: var(--color-text2);
+        background-color: var(--color-secondary);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        width: 80%;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        overflow: hidden;
+
+    }
+
+    .btn-my-account i {
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+        color: var(--color-text);
+    }
+
+    .btn-my-account span {
+        color: var(--color-text2);
+        font-size: .8rem;
+    }
+
+    .btn-sidebar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px 20px;
+        border: none;
+        background: transparent;
+        margin-bottom: 0.5rem;
+        color: var(--color-text2);
+        opacity: 1;
+        font-size: 0.9rem;
+        font-weight: 400;
+        text-decoration: none;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .btn-sidebar span,
+    .btn-my-account span {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-left: 8px;
+        opacity: 1;
+        width: auto;
+        transition: width 0.3s ease, opacity 0.3s ease;
+    }
+
+    .btn-sidebar i {
+        min-width: 20px;
+        text-align: center;
+        margin-right: 0.5rem;
+        color: var(--color-text);
+    }
+
+    /* -----------  Sidebar Behavior -----------  */
+    .patient-sidebar-container.active .btn-sidebar span {
+        width: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: width 0.3s ease, opacity 0.3s ease;
+    }
+
+    .patient-sidebar-container.active .btn-my-account span {
+        opacity: 0;
+        width: 0;
+        margin-left: 0;
+        pointer-events: none;
+    }
+
+    /* -----------  Hover & Active Effects -----------  */
+    .btn-sidebar:hover {
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        font-weight: 550;
+    }
+
+    .btn-sidebar.active {
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        font-weight: 550;
+    }
+
+    /* -----------  Other Buttons -----------  */
+    .btn-backtohome {
+        margin-bottom: 1rem !important;
+    }
+
+    /* -----------  Scrollbar Styling -----------  */
+    .patient-sidebar-container::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .patient-sidebar-container::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary);
+        border-radius: 4px;
+    }
+
+    .patient-sidebar-container::-webkit-scrollbar-track {
+        background-color: var(--color-secondary);
+    }
+
+    /* -----------  Logout Button -----------  */
+    .sidebar-logout {
+        margin-top: auto;
+        width: 100%;
+        margin-bottom: .5rem !important;
+    }
+
+    .sidebar-logout-btn {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .sidebar-logout-btn:hover {
+        background-color: var(--color-primary);
+        color: var(--color-text);
+        font-weight: 550;
+    }
+

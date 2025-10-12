@@ -1,0 +1,53 @@
+/* RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+}
+
+.fixed-top {
+    width: 100%;
+    background-color: #FEF3E7;
+}
+
+.top-nav {
+    background-color: #FEF3E7;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.mapru-logo img {
+    width: 20%;       /* Or whatever fixed size you want */
+    height: auto;
+}
+
+.icon-wrapper i {
+    color: #333;
+    font-size: 1.8rem;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon-wrapper .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+.nav-item h3{
+    font-size: clamp(1.2rem, 1vw, 1rem);
+}
+
+

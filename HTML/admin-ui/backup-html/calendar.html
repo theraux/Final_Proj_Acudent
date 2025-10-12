@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Dental MIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'beige-50': '#faf8f5',
+                        'beige-100': '#f5f1ea',
+                        'beige-200': '#ebe3d5',
+                        'brown-100': '#e8ddd4',
+                        'brown-200': '#d4c4b0',
+                        'brown-300': '#b8a082',
+                        'brown-400': '#9c7c54',
+                        'brown-500': '#8b6914',
+                        'brown-600': '#7a5a12',
+                        'brown-700': '#6b4e10'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .profile-shadow {
+            box-shadow: 0 4px 6px -1px rgba(139, 105, 20, 0.1), 0 2px 4px -1px rgba(139, 105, 20, 0.06);
+        }
+        .calendar-day {
+            min-height: 120px;
+        }
+        .appointment-slot {
+            font-size: 0.75rem;
+            padding: 2px 4px;
+            margin: 1px 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 min-h-full">
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-brown-200 profile-shadow fixed w-full top-0 z-30">
+        <div class="flex justify-between items-center h-16 px-6">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-brown-700">🦷 DentalMIS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-brown-200 rounded-full flex items-center justify-center">
+                        <span class="text-sm text-brown-600">👤</span>
+                    </div>
+                    <span class="text-brown-700 font-medium">Sarah Johnson</span>
+                </div>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm">
+                    🔔
+                </button>
+                <button class="text-brown-600 hover:text-brown-700 px-3 py-2 rounded-md text-sm">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-brown-200 profile-shadow fixed h-full overflow-y-auto">
+            <nav class="p-4 space-y-2">
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 bg-brown-100 text-brown-700 px-3 py-2 rounded-md font-medium">
+                    <span>📅</span>
+                    <span>Appointments</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>🦷</span>
+                    <span>Treatment History</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>💰</span>
+                    <span>Billing</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📋</span>
+                    <span>Medical Records</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>⚙️</span>
+                    <span>My Account</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 text-brown-600 hover:text-brown-700 hover:bg-beige-100 px-3 py-2 rounded-md transition-colors">
+                    <span>📞</span>
+                    <span>Support</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-6">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold text-brown-700">Appointments</h2>
+                        <p class="mt-2 text-brown-600">Manage your dental appointments and schedule</p>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button onclick="bookNewAppointment()" class="bg-brown-500 hover:bg-brown-600 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                            + Book Appointment
+                        </button>
+                        <button onclick="viewAvailability()" class="border border-brown-300 text-brown-700 hover:bg-brown-50 px-4 py-2 rounded-md font-medium transition-colors">
+                            View Availability
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <span class="text-2xl">📅</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Upcoming</p>
+                            <p class="text-2xl font-bold text-brown-700">3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <span class="text-2xl">✅</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Completed</p>
+                            <p class="text-2xl font-bold text-brown-700">24</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-yellow-100 rounded-lg">
+                            <span class="text-2xl">⏰</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">This Month</p>
+                            <p class="text-2xl font-bold text-brown-700">2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg profile-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-red-100 rounded-lg">
+                            <span class="text-2xl">❌</span>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-brown-600">Cancelled</p>
+                            <p class="text-2xl font-bold text-brown-700">1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Toggle and Calendar Navigation -->
+            <div class="bg-white rounded-lg profile-shadow p-4 mb-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex bg-beige-100 rounded-lg p-1">
+                        <button onclick="switchView('calendar')" id="calendar-btn" class="px-4 py-2 rounded-md text-sm font-medium bg-brown-500 text-white transition-colors">
+                            Calendar View
+                        </button>
+                        <button onclick="switchView('list')" id="list-btn" class="px-4 py-2 rounded-md text-sm font-medium text-brown-600 hover:text-brown-700 transition-colors">
+                            List View
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="previousMonth()" class="p-2 text-brown-600 hover:text-brown-700 hover:bg-beige-100 rounded-md">
+                            ←
+                        </button>
+                        <h3 class="text-lg font-semibold text-brown-700" id="currentMonth">January 2024</h3>
+                        <button onclick="nextMonth()" class="p-2 text-brown-600 hover:text-brown-700 hover:bg-beige-100 rounded-md">
+                            →
+                        </button>
+                        <button onclick="goToToday()" class="px-3 py-1 text-sm border border-brown-300 text-brown-700 hover:bg-brown-50 rounded-md">
+                            Today
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div id="calendar-view" class="bg-white rounded-lg profile-shadow">
+                <!-- Calendar Header -->
+                <div class="grid grid-cols-7 gap-0 border-b border-brown-200">
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Sunday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Monday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Tuesday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Wednesday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Thursday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Friday</div>
+                    <div class="p-4 text-center font-medium text-brown-700 bg-beige-100">Saturday</div>
+                </div>
+                
+                <!-- Calendar Grid -->
+                <div class="grid grid-cols-7 gap-0" id="calendar-grid">
+                    <!-- Week 1 -->
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm text-brown-400 mb-1">31</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">1</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">2</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">3</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">4</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">5</div>
+                    </div>
+                    <div class="calendar-day border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">6</div>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">7</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">8</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">9</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">10</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">11</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">12</div>
+                    </div>
+                    <div class="calendar-day border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">13</div>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">14</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">15</div>
+                        <div class="appointment-slot bg-blue-100 text-blue-800" onclick="viewAppointment('apt1')">
+                            10:00 AM - Cleaning
+                        </div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">16</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">17</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">18</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">19</div>
+                    </div>
+                    <div class="calendar-day border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">20</div>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">21</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">22</div>
+                        <div class="appointment-slot bg-yellow-100 text-yellow-800" onclick="viewAppointment('apt2')">
+                            2:00 PM - Root Canal
+                        </div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">23</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">24</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">25</div>
+                    </div>
+                    <div class="calendar-day border-r border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">26</div>
+                    </div>
+                    <div class="calendar-day border-b border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">27</div>
+                    </div>
+
+                    <!-- Week 5 -->
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">28</div>
+                    </div>
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">29</div>
+                    </div>
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">30</div>
+                        <div class="appointment-slot bg-green-100 text-green-800" onclick="viewAppointment('apt3')">
+                            11:30 AM - Checkup
+                        </div>
+                    </div>
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm font-medium text-brown-700 mb-1">31</div>
+                    </div>
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm text-brown-400 mb-1">1</div>
+                    </div>
+                    <div class="calendar-day border-r border-brown-200 p-2">
+                        <div class="text-sm text-brown-400 mb-1">2</div>
+                    </div>
+                    <div class="calendar-day border-brown-200 p-2">
+                        <div class="text-sm text-brown-400 mb-1">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List View (Hidden by default) -->
+            <div id="list-view" class="hidden">
+                <!-- Upcoming Appointments -->
+                <div class="bg-white rounded-lg profile-shadow mb-6">
+                    <div class="p-6 border-b border-brown-200">
+                        <h3 class="text-lg font-semibold text-brown-700">Upcoming Appointments</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="border border-brown-200 rounded-lg p-4 hover:bg-beige-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-xl">🦷</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-700">Routine Cleaning & Examination</h4>
+                                        <p class="text-brown-600 text-sm">January 15, 2024 at 10:00 AM</p>
+                                        <p class="text-brown-600 text-sm">Dr. Smith • 45 minutes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Confirmed</span>
+                                    <div class="flex space-x-2">
+                                        <button onclick="rescheduleAppointment('apt1')" class="text-brown-500 hover:text-brown-700 text-sm">Reschedule</button>
+                                        <button onclick="cancelAppointment('apt1')" class="text-red-500 hover:text-red-700 text-sm">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-brown-200 rounded-lg p-4 hover:bg-beige-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                        <span class="text-xl">🔍</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-700">Root Canal Treatment</h4>
+                                        <p class="text-brown-600 text-sm">January 22, 2024 at 2:00 PM</p>
+                                        <p class="text-brown-600 text-sm">Dr. Wilson (Endodontist) • 120 minutes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Scheduled</span>
+                                    <div class="flex space-x-2">
+                                        <button onclick="rescheduleAppointment('apt2')" class="text-brown-500 hover:text-brown-700 text-sm">Reschedule</button>
+                                        <button onclick="cancelAppointment('apt2')" class="text-red-500 hover:text-red-700 text-sm">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-brown-200 rounded-lg p-4 hover:bg-beige-50 transition-colors">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                        <span class="text-xl">✅</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-700">Follow-up Checkup</h4>
+                                        <p class="text-brown-600 text-sm">January 30, 2024 at 11:30 AM</p>
+                                        <p class="text-brown-600 text-sm">Dr. Smith • 30 minutes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Confirmed</span>
+                                    <div class="flex space-x-2">
+                                        <button onclick="rescheduleAppointment('apt3')" class="text-brown-500 hover:text-brown-700 text-sm">Reschedule</button>
+                                        <button onclick="cancelAppointment('apt3')" class="text-red-500 hover:text-red-700 text-sm">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Appointments -->
+                <div class="bg-white rounded-lg profile-shadow">
+                    <div class="p-6 border-b border-brown-200">
+                        <h3 class="text-lg font-semibold text-brown-700">Recent Appointments</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="border border-brown-200 rounded-lg p-4 bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                                        <span class="text-xl">🦷</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-700">Dental Cleaning & Examination</h4>
+                                        <p class="text-brown-600 text-sm">December 15, 2023 at 10:00 AM</p>
+                                        <p class="text-brown-600 text-sm">Dr. Smith • Completed</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Completed</span>
+                                    <button onclick="viewAppointmentDetails('apt_past1')" class="text-brown-500 hover:text-brown-700 text-sm">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-brown-200 rounded-lg p-4 bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                                        <span class="text-xl">🔧</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-brown-700">Composite Filling</h4>
+                                        <p class="text-brown-600 text-sm">October 8, 2023 at 2:30 PM</p>
+                                        <p class="text-brown-600 text-sm">Dr. Johnson • Completed</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Completed</span>
+                                    <button onclick="viewAppointmentDetails('apt_past2')" class="text-brown-500 hover:text-brown-700 text-sm">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Appointment Details -->
+    <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-brown-700" id="appointmentModalTitle">Appointment Details</h3>
+                    <button onclick="closeAppointmentModal()" class="text-brown-500 hover:text-brown-700">
+                        <span class="text-2xl">×</span>
+                    </button>
+                </div>
+                <div id="appointmentModalContent" class="text-brown-600">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Booking New Appointment -->
+    <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg max-w-md w-full mx-4">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-brown-700">Book New Appointment</h3>
+                    <button onclick="closeBookingModal()" class="text-brown-500 hover:text-brown-700">
+                        <span class="text-2xl">×</span>
+                    </button>
+                </div>
+                <form onsubmit="submitBooking(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-brown-700 mb-1">Appointment Type</label>
+                        <select class="w-full px-3 py-2 border border-brown-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brown-500">
+                            <option>Routine Cleaning</option>
+                            <option>Examination</option>
+                            <option>Filling</option>
+                            <option>Root Canal</option>
+                            <option>Crown/Bridge</option>
+                            <option>Emergency</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brown-700 mb-1">Preferred Doctor</label>
+                        <select class="w-full px-3 py-2 border border-brown-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brown-500">
+                            <option>Dr. Smith</option>
+                            <option>Dr. Johnson</option>
+                            <option>Dr. Wilson</option>
+                            <option>Any Available</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brown-700 mb-1">Preferred Date</label>
+                        <input type="date" class="w-full px-3 py-2 border border-brown-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brown-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brown-700 mb-1">Preferred Time</label>
+                        <select class="w-full px-3 py-2 border border-brown-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brown-500">
+                            <option>Morning (9:00 AM - 12:00 PM)</option>
+                            <option>Afternoon (1:00 PM - 5:00 PM)</option>
+                            <option>Any Time</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brown-700 mb-1">Notes (Optional)</label>
+                        <textarea rows="3" class="w-full px-3 py-2 border border-brown-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brown-500" placeholder="Any special requests or concerns..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" onclick="closeBookingModal()" class="px-4 py-2 border border-brown-300 text-brown-700 rounded-md hover:bg-brown-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-brown-500 hover:bg-brown-600 text-white rounded-md transition-colors">
+                            Request Appointment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMonth = 0; // January 2024
+        const months = [
+            'January 2024', 'February 2024', 'March 2024', 'April 2024',
+            'May 2024', 'June 2024', 'July 2024', 'August 2024',
+            'September 2024', 'October 2024', 'November 2024', 'December 2024'
+        ];
+
+        function switchView(viewType) {
+            const calendarView = document.getElementById('calendar-view');
+            const listView = document.getElementById('list-view');
+            const calendarBtn = document.getElementById('calendar-btn');
+            const listBtn = document.getElementById('list-btn');
+
+            if (viewType === 'calendar') {
+                calendarView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                calendarBtn.classList.add('bg-brown-500', 'text-white');
+                calendarBtn.classList.remove('text-brown-600');
+                listBtn.classList.remove('bg-brown-500', 'text-white');
+                listBtn.classList.add('text-brown-600');
+            } else {
+                calendarView.classList.add('hidden');
+                listView.classList.remove('hidden');
+                listBtn.classList.add('bg-brown-500', 'text-white');
+                listBtn.classList.remove('text-brown-600');
+                calendarBtn.classList.remove('bg-brown-500', 'text-white');
+                calendarBtn.classList.add('text-brown-600');
+            }
+        }
+
+        function previousMonth() {
+            if (currentMonth > 0) {
+                currentMonth--;
+                document.getElementById('currentMonth').textContent = months[currentMonth];
+            }
+        }
+
+        function nextMonth() {
+            if (currentMonth < months.length - 1) {
+                currentMonth++;
+                document.getElementById('currentMonth').textContent = months[currentMonth];
+            }
+        }
+
+        function goToToday() {
+            currentMonth = 0; // January 2024
+            document.getElementById('currentMonth').textContent = months[currentMonth];
+        }
+
+        function viewAppointment(appointmentId) {
+            const modal = document.getElementById('appointmentModal');
+            const title = document.getElementById('appointmentModalTitle');
+            const content = document.getElementById('appointmentModalContent');
+            
+            const appointments = {
+                'apt1': {
+                    title: 'Routine Cleaning & Examination',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="font-medium text-brown-700 mb-2">Appointment Details</h4>
+                                    <div class="bg-beige-50 p-3 rounded-md space-y-1">
+                                        <p class="text-sm"><strong>Date:</strong> January 15, 2024</p>
+                                        <p class="text-sm"><strong>Time:</strong> 10:00 AM - 10:45 AM</p>
+                                        <p class="text-sm"><strong>Duration:</strong> 45 minutes</p>
+                                        <p class="text-sm"><strong>Doctor:</strong> Dr. Smith</p>
+                                        <p class="text-sm"><strong>Status:</strong> Confirmed</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-brown-700 mb-2">Treatment Information</h4>
+                                    <div class="bg-beige-50 p-3 rounded-md space-y-1">
+                                        <p class="text-sm"><strong>Type:</strong> Preventive Care</p>
+                                        <p class="text-sm"><strong>Procedures:</strong> Cleaning, Examination</p>
+                                        <p class="text-sm"><strong>Estimated Cost:</strong> $150.00</p>
+                                        <p class="text-sm"><strong>Insurance:</strong> Covered</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-brown-700 mb-2">Preparation Instructions</h4>
+                                <div class="bg-blue-50 p-3 rounded-md">
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Brush and floss before your appointment</li>
+                                        <li>• Arrive 15 minutes early for check-in</li>
+                                        <li>• Bring your insurance card and ID</li>
+                                        <li>• List any medications you're currently taking</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="flex justify-end space-x-3 pt-4">
+                                <button onclick="rescheduleAppointment('apt1')" class="px-4 py-2 border border-brown-300 text-brown-700 rounded-md hover:bg-brown-50 transition-colors">
+                                    Reschedule
+                                </button>
+                                <button onclick="cancelAppointment('apt1')" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors">
+                                    Cancel Appointment
+                                </button>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            const appointment = appointments[appointmentId] || {
+                title: 'Appointment Details',
+                content: '<p class="text-sm">Appointment information not available.</p>'
+            };
+            
+            title.textContent = appointment.title;
+            content.innerHTML = appointment.content;
+            modal.classList.remove('hidden');
+        }
+
+        function bookNewAppointment() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function viewAvailability() {
+            showNotification('Availability calendar would open here');
+        }
+
+        function rescheduleAppointment(appointmentId) {
+            showNotification('Reschedule functionality would open here');
+        }
+
+        function cancelAppointment(appointmentId) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                showNotification('Appointment cancelled successfully');
+                closeAppointmentModal();
+            }
+        }
+
+        function viewAppointmentDetails(appointmentId) {
+            showNotification('Detailed appointment history would open here');
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            showNotification('Appointment request submitted! We will contact you to confirm.');
+            closeBookingModal();
+        }
+
+        function closeAppointmentModal() {
+            document.getElementById('appointmentModal').classList.add('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('appointmentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAppointmentModal();
+            }
+        });
+
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookingModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ba70b2f2dabc2e',t:'MTc1OTk3Njg2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
