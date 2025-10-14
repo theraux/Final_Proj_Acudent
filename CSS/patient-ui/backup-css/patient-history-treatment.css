@@ -1,0 +1,246 @@
+
+
+    :root {
+        --color-primary: #F5E3CD;
+        --color-secondary: #FEF3E7;
+        --color-secondary2: #fcf7f2;
+        --color-tertiary: #9E5B08;
+        --color-text: #703803;
+        --color-text2: #502803;
+
+    }
+
+
+.treatment-history-container{
+    width: 100%;
+    height: 100vh;
+    padding: 0.75rem 1.5rem 1.5rem 2rem;
+}
+.treatment-history-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+.treatment-history-title{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: var(--color-text);
+}
+.treatment-history-title-wrap{
+    text-align: start;
+}
+.button-appointment-treatment button{
+    padding: 1rem;
+    border: 1px solid var(--color-text);
+    border-radius: 15px;
+    color: var(--color-text);
+    font-size: 1rem;
+    background-color: #fff;
+}
+.button-appointment-treatment button:hover{
+    background-color: var(--color-primary);
+}
+
+.appointment-treatment-history{
+    display: inline-block;
+}
+
+/*Profile User */
+.progress-profile-wrapper{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    background-color: var(--color-secondary);
+}
+.patient-profile-wrapper{
+    display: flex;
+}
+.img-profile-wrapper{
+    border: 1px solid var(--color-text);
+    border-radius: 50%;
+    color: var(--color-tertiary);
+    width: 100px;
+    height: 100px;
+}
+.patient-profile-name{
+    align-items: center;
+    margin-left: 1rem;
+    color: var(--color-text);  
+}
+.patient-profile-name p{
+    margin: 0;
+    font-size: 1rem;
+}
+
+
+/*Progress*/
+.progress-profile-container{
+    display: flex;
+    gap: 1rem;
+      cursor: pointer;
+}
+.progress{
+    width: 100%;
+    border: 1px solid var(--color-text);
+    height: 80px;
+    display: block;
+    padding: 1rem 1.50rem;
+    background-color: #fff;
+}
+.progress h4{
+    font-size: 0.80rem;
+    text-align: center;
+    align-items: center;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+.progress p{
+    text-align: center;
+}
+.progress span{
+    color: var(--color-text);
+}
+
+/*flex with searchbar */
+.history-treatment-caret-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 1rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+}
+.history-treatment-searchbar-wrapper{
+    position: relative;
+}
+.history-treatment-searchbar-wrapper input{
+    padding: .85rem;
+}
+
+#history-treatment-search{
+    border-radius: 15px;
+    border: 1px solid var(--color-text);
+}
+#history-treatment-search:focus{
+    border-color: var(--color-primary);
+    border: none;
+}
+.history-treatment-searchbar-wrapper i {
+    position: absolute;
+    left: 200px;  /* Adjust the position from the left */
+    top:48%;
+    font-size: 1.2rem;
+    transform: translateY(-50%); /* Centers the icon vertically */
+    pointer-events: none; /* Ensures the icon doesn’t interfere with clicking on the input */
+}
+
+.history-caret-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+}
+.history-all-carets{
+    display: flex;
+    border: 1px solid var(--color-text);
+    background-color: #fff;
+    width: 160px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+.history-all-carets p{
+    font-size: 1rem;
+    margin: 0;
+}
+.history-all-carets i{
+    margin-left: 5px;
+    color: var(--color-text);
+}
+
+
+/* Treatment Timeline toggle */
+.treatment-timeline-container{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+}
+.treatment-timeline-title{
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.toggle-timeline-wrapper{
+    display: flex;
+    gap: 1rem;
+    width: 20%;
+      cursor: pointer;
+}
+.toggle-timeline-wrap{
+   border: 1px solid var(--color-text);
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+}
+.toggle-timeline{
+    padding: .50rem;
+}
+.toggle-timeline p{
+    margin: 0;
+}
+.toggle-timeline-wrap:hover{
+    background-color: var(--color-primary);
+}
+
+
+/* timeline-overview */
+.treatment-history-timeline-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 16px 32px;
+
+}
+.treatment-history-timeline-overview-container{
+    background-color: var(--color-secondary2);
+    box-shadow: 0 2px 10px rgba(0,0,0, 0.2);
+}
+
+
+
+
+.treatment-history-wrap{
+    display: flex;
+    flex-direction: column;
+}
+.treatment-history-wrap h3{
+    color: var(--color-text);
+}
+.treatment-history-overview-timeline{
+
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.treatment-history-overview-timeline p{
+    color: var(--color-text);
+    font-weight: 700;
+}
+.treatment-history-overview-timeline span{
+    color: var(--color-text);
+    font-weight: 400!important;
+}
+.treatment-view-details-btn{
+    padding: .85rem;
+    font-size: .85rem;
+}
+.treatment-view-details-btn button{
+    border: none;
+    color: var(--color-text);
+}
