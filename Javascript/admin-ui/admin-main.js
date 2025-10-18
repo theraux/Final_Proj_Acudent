@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Automatically load the dashboard by default when page loads
-  loadPage('../../HTML/admin-ui/admin-subfolder/admin-dashboard.html');
+  loadPage('../../HTML/admin-ui/admin-subfolder/admin-patient-management.html');
 });
 
 
@@ -90,7 +90,7 @@ function initPageScript(pageUrl) {
       initAdminPatientManagement();
     } else {
       const script = document.createElement('script');
-      script.src = '../../Javascript/admin-ui/admin-subfolder/admin-patient-management.js';
+      script.src = '../../Javascript/admin-ui/admin-backup/admin-patient-management.js';
       script.defer = true;
       script.onload = () => initAdminPatientManagement();
       document.body.appendChild(script);
