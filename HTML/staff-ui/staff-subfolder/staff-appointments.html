@@ -1,0 +1,151 @@
+<section id="staff-appointment-scheduler" class="staff-appointment-container">
+    <div class="staff-appointment">
+        <div class="today-appointment">
+            <h3>Today's Appointment</h3>
+        </div>
+
+        <div class="row staff-appointment-wrapper row-cols-2">
+            <div class="col-4">
+                <div class="staff-title-status-container">
+                    <div class="staff-appointment-overview-wrapper d-flex align-items-center">
+                        <span><i class="fa-solid fa-square-check"></i></span>
+                        <div class="staff-appointment-overview">
+                            <p>Completed</p>
+                            <p><span id="staff-patients-completed" class="staff-patient-overview-p">24</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-title-status-container">
+                    <div class="staff-appointment-overview-wrapper d-flex align-items-center">
+                        <span><i class="fa-solid fa-clock"></i></span>
+                        <div class="staff-appointment-overview">
+                            <p>This Month</p>
+                            <p><span id="staff-patient-thismonth" class="staff-patient-overview-p">24</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="staff-title-status-container">
+                    <div class="staff-appointment-overview-wrapper d-flex align-items-center">
+                        <span><i class="fa-solid fa-circle-xmark"></i></span>
+                        <div class="staff-appointment-overview">
+                            <p>Cancelled</p>
+                            <p><span id="staff-patient-cancelled" class="staff-patient-overview-p">24</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-8 for-table">
+                <div class="staff-table">
+                    <table class="table staff-appointment-type" id="staff-appointmentType-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Time</th>
+                                <th>Dentist</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-appointmentType-body">
+                            <tr>
+                                <td>John Doedahdjabjsbdjsabajdd</td>
+                                <td>Cleaningdasndkanskdans</td>
+                                <td>10:00 AMflmalwfmalsdlslmlm</td>
+                                <td>Dr. Smith</td>
+                                <td><span id="staff-status-confirmed">Confirmed</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>John Doedahdjabjsbdjsabajdd</td>
+                                <td>Cleaningdasndkanskdans</td>
+                                <td>10:00 AMflmalwfmalsdlslmlm</td>
+                                <td>Dr. Smith</td>
+                                <td><span id="staff-status-confirmed">Confirmed</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>John Doedahdjabjsbdjsabajdd</td>
+                                <td>Cleaningdasndkanskdans</td>
+                                <td>10:00 AMflmalwfmalsdlslmlm</td>
+                                <td>Dr. Smith</td>
+                                <td><span id="staff-status-confirmed">Confirmed</span></td>
+                            </tr>
+                        </tbody>
+                </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!---------Calendar-------------->
+<section class="admin-calendar-appointment-section" id="admin-calendar-appointments-section">
+    <div class="admin-calendar-appointments-wrapper">
+        <div class="admin-appointment-title-wrapper">
+            <h2>Appointments</h2>
+            <div class="admin-appointment-prev-next-month">
+                <button onclick="prevmonth()" class="btn-month" id="btn-previous-month"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <h3 id="month-year"></h3>
+                <button onclick="nextmonth()" class="btn-month" id="btn-next-month"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+                <div class="admin-appointment-edit-schedule">
+                    <button class="admin-edit-sched" id="edit-schedule" title="Edit Appointment" tabindex="0"
+                        data-target="admin-calendar-appointment-section">Edit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row admin-calendar-appointments-container-row row-cols-1"
+            id="admin-calendar-appointments-container">
+            <!-- Appointment items will be dynamically added here -->
+            <div class="col name-of-the-day">
+                <div class="row row-cols-7">
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Sun</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Mon</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Tue</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Wed</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Thu</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Fri</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="admin-calendar-days">
+                            <p>Sat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col number-of-days">
+                <!-- Days will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+</section>

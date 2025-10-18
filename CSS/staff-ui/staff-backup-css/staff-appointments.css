@@ -1,0 +1,719 @@
+
+    :root {
+        --color-primary: #F5E3CD;
+        --color-secondary: #FEF3E7;
+        --color-secondary2: #fcf7f2;
+        --color-tertiary: #9E5B08;
+        --color-text: #703803;
+        --color-text2: #502803;
+
+    }
+.staff-appointment-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 5px 20px 30px;
+}
+.staff-appointment {
+  align-items: center;
+}
+.today-appointment{
+    margin-bottom: 3rem;
+}
+.today-appointment h3 {
+  color: #502C00;
+}
+
+/* table */
+.for-table{
+    overflow: hidden;
+    height: 100%;
+}
+.staff-table{
+    overflow-y: auto;
+    height: 345px;
+}
+.staff-appointment-type{
+    width: 100%;
+}
+.staff-appointment-type thead th{
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    position: sticky;
+    top: 0;
+    padding: 1.2rem;
+    text-align: center;
+    border-top: 1px solid var(--color-text);
+    border-bottom: 1px solid var(--color-text);
+}
+.staff-appointment-type{
+    table-layout: fixed;
+    position: relative;
+    border-collapse: separate; /* allow rounded corners */
+    border-spacing: 0 10px; /* creates space between rows */
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+.staff-appointment-type tbody {
+    width: 100%;
+    border-radius: 2rem; /* Keep the rounding */
+    overflow-x: hidden;
+    color: var(--color-text);
+    white-space: normal; 
+}
+.staff-appointment-type tbody td {
+  border: 1px solid var(--color-text); /* brown border */
+  padding: 1.2rem;
+  margin: 0;
+  gap: 0;
+  text-align: center;
+}
+#staff-appointmentType-body td span{
+    color: #093a14;
+    background-color: #28a74656;
+    border-radius: 15px;
+    padding: .40rem;
+}
+.staff-appointment-type tbody  td:first-child {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px
+}
+.staff-appointment-type tbody  td:last-child {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px
+}
+
+
+/* Remove left border for all cells except the first one */
+.staff-appointment-type tbody td:not(:first-child) {
+  border-left: none;
+}
+
+.staff-appointment-type tbody td:not(:last-child) {
+  border-right: none;
+}
+
+/* Card box */
+.staff-appointment-wrapper{
+  display: flex;
+  width: 100%;
+  height: 380px;
+  justify-content: center;
+  margin-top: 1rem;
+  background-color: var(--color-secondary2);
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.staff-appointment-overview-wrapper{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 100px;
+  background-color: #fff;
+  gap: 2rem;
+}
+.staff-appointment-overview-wrapper:hover{
+    background-color: var(--color-secondary);
+    transform: translateY(-5px);
+}
+.staff-overview-box{
+    display: flex;
+}
+.staff-appointment-overview-wrapper .fa-square-check{
+  font-size: 1.5rem;
+  color: green;
+  font-weight: bold;
+}
+.staff-appointment-overview-wrapper .fa-clock{
+  font-size: 1.5rem;
+  color: var(--color-tertiary);
+  font-weight: bold;
+}
+.staff-appointment-overview-wrapper .fa-circle-xmark{
+  font-size: 1.5rem;
+  color: red;
+  font-weight: bold;
+}
+.staff-appointment-overview{
+  color: var(--color-text);
+  font-size: 1.2rem;
+  text-align: center;
+  width: 50%;
+}
+.staff-appointment-overview p{
+  margin: 0%;
+  font-size: 1.2rem;
+
+}
+.staff-patient-overview-p{
+  font-weight: 800;
+}
+.staff-title-status-container{
+    width: 100%;
+    justify-items: center;
+    padding: .5rem
+}
+
+/* --- For tablets (max-width: 992px) --- */
+@media (max-width: 992px) {
+  .row.staff-appointment-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .col-4, .col-8 {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .staff-appointment-overview-wrapper {
+    width: 90%;
+    height: 90px;
+    gap: 1.5rem;
+  }
+
+  .staff-table {
+    height: auto;
+  }
+
+  .staff-appointment-type thead th, 
+  .staff-appointment-type tbody td {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .today-appointment {
+    margin-bottom: 2rem;
+  }
+}
+
+/* --- For mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .staff-appointment-container {
+    padding: 15px;
+  }
+
+  .today-appointment h3 {
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  .staff-appointment-overview-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    gap: 0.8rem;
+  }
+  .staff-appointment-overview {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+
+  .staff-appointment-type tbody tr {
+    background: #fff;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .staff-appointment-type tbody td {
+    display: flex;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .staff-appointment-type tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .staff-appointment-type tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--color-text);
+    flex-basis: 50%;
+    text-align: left;
+  }
+
+  /* Adjust table text wrapping */
+  .staff-appointment-type tbody td {
+    word-break: break-word;
+  }
+}
+
+/* --- For very small phones (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .today-appointment h3 {
+    font-size: 1.2rem;
+  }
+
+  .staff-appointment-overview-wrapper {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .staff-appointment-type tbody td {
+    font-size: 0.85rem;
+  }
+
+  #staff-appointmentType-body td span {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+
+
+/* calendar */
+.shared-calendar-appointment-section{
+    width: 100%;
+    padding: 20px 5px 20px 30px;
+}
+.shared-appointment-title-wrapper{
+    color: var(--color-text);
+}
+.shared-appointment-prev-next-month{
+    display: flex;
+  /* justify-content: space-between; */
+    color: var(--color-text);
+    border: none;
+    padding: 0.8rem 1rem;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;  
+    background-color: var(--color-secondary2);
+    align-items:center ;
+}
+
+.admin-appointment-prev-next-month button{
+    border: none;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+.admin-appointment-edit-schedule{
+    margin-left: auto;
+}
+.admin-appointment-edit-schedule button{
+    text-align: center;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    padding: 0.8rem;
+    background-color: #fff;
+    width: 100%;
+}
+.admin-appointment-edit-schedule button:hover{
+    background-color: var(--color-secondary);
+}
+
+.admin-calendar-appointments-container-row{
+    width: 100%;
+    justify-content: center;
+}
+.name-of-the-day{
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    padding: 1rem;
+    justify-content: center;
+    width: 100%;
+    font-weight: 600;
+}
+.admin-calendar-days{
+   text-align: center;
+
+}
+.number-of-days{
+    justify-content: center;
+    text-align: center;
+    width: 100%;    
+}
+.number-of-days p{
+    text-align: center;
+}
+.admin-calendar-box{
+    width: 100%;
+    height: 120px;
+    border: var(--color-text) 1px solid;
+    cursor: pointer;
+}
+.admin-calendar-box:hover{
+    background-color: var(--color-secondary);
+}
+ .admin-calendar-box.prev-month {
+            opacity: 0.5;
+            color: var(--color-text);
+        }
+        .admin-calendar-box.next-month {
+            opacity: 0.5;
+            color: var(--color-text);
+        }
+        .admin-calendar-box.current-month {
+            opacity: 1;
+            color: var(--color-text); /* Full opacity for current month */
+        }
+        .admin-calendar-box.today {
+            background-color: #F5E3CD !important; /* Highlight today's date with blue background */
+            font-weight: bold;
+           
+        }
+        .admin-calendar-box.today:hover{
+            background-color: var(--color-secondary)!important;
+        }
+        .admin-calendar-box:empty {
+            /* Ensure empty boxes (if any) are invisible */
+            visibility: hidden;
+        }
+
+
+        /* Modal for edit appointment */
+.admin-edit-appointment-schedule-container{
+position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* full viewport */
+     background: rgba(0, 0, 0, 0.4); /* semi-transparent background */
+    display: none; /* hidden by default */
+    justify-content: center;
+    align-items: center; /* centers vertically */
+    z-index: 1000;
+}
+.admin-edit-appointment-schedule-container.active {
+    display: flex; /* show when active */
+}
+.admin-edit-appointment-schedule-modal{
+    background: #fff;
+    padding: 40px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    width: 40%;
+    height: auto;
+    max-width: 90%;
+    position: relative;
+    justify-items:center ;
+    
+}
+.edit-appointment-schedule-title{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem;
+    width: 50%;
+    border: 1px solid var(--color-text);
+    border-radius: 15px;
+    text-align: center;
+    color: var(--color-text);
+}
+.btn-close-edit-appointment-schedule {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+.btn-close-edit-appointment-schedule:hover{
+    transform: scale(1.2);
+  color: #8B5E34;
+}
+.admin-edit-appointment-schedule-wrapper-row{
+    margin-top: 2rem;
+}
+
+.block-time-title{
+    color: var(--color-text);
+    justify-items: center;
+}
+.block-time-title label {
+    margin-top: 1rem;
+    font-size: 1.2rem
+}
+
+.block-time-title input[type="checkbox"] {
+    transform: scale(1.5); /* Adjust the scale as needed */
+    margin-right: 10px; /* Add gap between the checkbox and label */
+}
+
+/* === Box Wrapper === */
+.admin-edit-appointment {
+    position: relative;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #fff;
+    color: var(--color-text);
+    text-align: center;
+    display: flex;
+    align-items: center; /* vertically center label text */
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+
+/* Top accent border */
+.admin-edit-appointment::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background-color: var(--color-text);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* === Input styling === */
+.admin-edit-appointment input[type="time"],
+.admin-edit-appointment input[type="text"] {
+    width: 100%;
+    height: 72px;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    padding: 0.5rem;
+    background-color: #fff;
+    color: var(--color-text);
+    font-size: 1rem;
+    box-sizing: border-box;
+    margin: 0; /* remove extra spacing */
+}
+
+/* Remove extra padding only for input containers */
+.admin-edit-appointment:has(input) {
+    padding: 0; /* Remove padding for input boxes only */
+}
+
+.admin-edit-appointment input:focus {
+    outline: none;
+    border-color: var(--color-tertiary);
+    box-shadow: 0 0 4px var(--color-tertiary);
+}
+.admin-block-schedule{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+.admin-confirm-appointmentbtn,
+.admin-cancel-appointmentbtn{
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: relative;
+    width: 20%;
+    border: 1px solid var(--color-text);
+    border-radius: 5px;
+    padding: .8rem;
+    color: var(--color-text);
+}
+.admin-confirm-appointmentbtn:hover,
+.admin-cancel-appointmentbtn:hover{
+    background-color: var(--color-secondary);
+}
+/* Optional animation */
+@keyframes modalPop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+/* Modal for view appointments */
+.admin-view-appointments-modal-container{
+position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* full viewport */
+    background: rgba(0, 0, 0, 0.4); /* semi-transparent background */
+    display: none; /* hidden by default */
+    justify-content: center;
+    align-items: center; /* centers vertically */
+    z-index: 1000;
+}
+.admin-view-appointments-modal-container.active{
+    display: flex;
+}
+.admin-view-appointments-modal{
+ background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    width: 40%;
+    height: 500px;
+    max-width: 90%;
+    position: relative;
+    justify-items:center ;
+    overflow-y: auto;
+}
+.admin-view-appointments-close{
+    position: absolute;
+     top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.admin-view-appointments-close button{
+    border: none;
+     font-size: 2rem;
+    color: var(--color-text);
+}
+.admin-view-appointments-close button:hover{
+    transform: scale(1.2);
+  color: #8B5E34;
+}
+
+.view-appointments-title{
+    margin-top: 1rem;
+   color: var(--color-text);
+   font-size: 1rem;
+}
+.view-appointments-list{
+    margin-top: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+.appointment-item{
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-tertiary);
+    color: var(--color-text);
+}
+.admin-view-close{
+    margin-top: 1rem;
+}
+.admin-view-close button{
+    background-color: #fff;
+    padding: 0.8rem 2rem;
+    color: var(--color-text);
+    border: 1px solid var(--color-text);
+    width: 100%;
+}
+.admin-view-close button:hover{
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+}
+
+
+
+/* Styles for Reused Modal (Details View Inside View Modal) */
+#modal-content {
+    min-height: 200px; /* Ensures space for content */
+}
+
+.appointment-list {
+    list-style: none;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto; /* Scroll if many appointments */
+}
+
+.appointment-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.appointment-item:hover {
+    background-color: #f8f9fa;
+}
+
+.appointment-item:last-child {
+    border-bottom: none;
+}
+
+/* Details View Styles (Same as Before) */
+/* Single Modal Toggle Styles */
+#modal-content-wrapper {
+    min-height: 200px;
+}
+
+.view-appointments-list {
+    list-style: none;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.appointment-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.appointment-item:hover {
+    background-color: #f8f9fa;
+}
+
+#details-view {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.patient-name {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+.detail-col {
+    padding-left: 5rem;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 4px;
+    display: block;
+}
+.detail-label i{
+    margin-right: 8px;
+    color: var(--color-text);
+}
+
+.detail-value {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.full-width {
+    padding: 8px 0;
+}
+
+#back-to-list {
+    background-color:#fff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#back-to-list:hover {
+    background: #6d4a2a;
+}
+
+

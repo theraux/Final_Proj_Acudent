@@ -235,6 +235,8 @@
     background-color: #28a74656;
     padding: .40rem;
     border-radius: 15px;
+    white-space: normal; /* allow wrapping */
+    word-break: break-word; /* break long words */
 }
 
 .staff-patient-appointment-logs th:nth-child(1),
