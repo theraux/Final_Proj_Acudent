@@ -220,8 +220,8 @@
     .back-to-patient {
       padding: 5px;
     }
- 
-    .export-button button{
+
+    .export-button button {
       border: 1px solid var(--color-text);
       padding: .50rem;
       width: 100%;
@@ -230,7 +230,7 @@
       color: var(--color-text);
     }
 
-      .export-button button:hover{
+    .export-button button:hover {
       background-color: var(--color-primary);
     }
 
@@ -239,6 +239,7 @@
       background-color: var(--color-secondary2);
       padding: 1rem;
     }
+
     .patient-general-info-title h3,
     .patient-medical-record-title h3 {
       text-align: center;
@@ -254,23 +255,30 @@
       border-radius: 5px;
       color: var(--color-text);
       width: 80%;
-
       cursor: pointer;
     }
 
+
     .patient-information {
-       margin-top: 1.5rem;
-    width: 300px;
-    overflow-x: auto;           /* Enable horizontal scrolling */
-    white-space: nowrap;        /* Prevent wrapping */
-    /* Hide scrollbar (cross-browser) */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* IE and Edge */
-    border: 1px solid #50280373;
+      margin-top: 1.5rem;
+      width: 300px;
+      overflow-x: auto;
+      /* Enable horizontal scrolling */
+      white-space: nowrap;
+      /* Prevent wrapping */
+      /* Hide scrollbar (cross-browser) */
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      border: 1px solid #50280373;
     }
-.patient-information::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
-}
+
+    .patient-information::-webkit-scrollbar {
+      display: none;
+      /* Chrome, Safari, Opera */
+    }
+
     .patient-information p {
       font-size: 1rem;
       border-radius: 5px;
@@ -284,11 +292,14 @@
     .patient-information span {
       font-size: 1rem;
       font-weight: 400;
-         overflow-x: auto;           /* Enable horizontal scrolling */
-    white-space: nowrap;        /* Prevent wrapping */
-    /* Hide scrollbar (cross-browser) */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none; 
+      overflow-x: auto;
+      /* Enable horizontal scrolling */
+      white-space: nowrap;
+      /* Prevent wrapping */
+      /* Hide scrollbar (cross-browser) */
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
     }
 
     .patient-information p::before {
@@ -312,7 +323,7 @@
     /* Search Wrapper */
     .search-wrapper-patient-info {
       position: relative;
-      display: flex;    
+      display: flex;
       align-items: center;
     }
 
@@ -415,246 +426,283 @@
       margin-left: 5px;
     }
 
-/* Modal overlay - covers screen but not replaces content */
-.patient-full-info-container {
-  position: fixed; /* stays in front of everything */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: none; /* hidden by default */
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.4); /* semi-transparent background */
-  z-index: 9999; /* make sure it’s above your other sections */
-  overflow: hidden;  /* Prevent body scroll when modal is open */
-}
+    /* Modal overlay - covers screen but not replaces content */
+    .patient-full-info-container {
+      position: fixed;
+      /* stays in front of everything */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      /* hidden by default */
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      /* semi-transparent background */
+      z-index: 9999;
+      /* make sure it’s above your other sections */
+      overflow: hidden;
+      /* Prevent body scroll when modal is open */
+    }
 
-/* show modal */
-.patient-full-info-container.active {
-  display: flex;
-}
+    /* show modal */
+    .patient-full-info-container.active {
+      display: flex;
+    }
 
-/* modal content box - NO LONGER SCROLLABLE (handles sizing only) */
-.patient-full-info {
-  background: #fff;  /* Fixed: Removed invalid 'round' */
-  border-radius: 10px;
-  padding: 1.5rem 2.8rem;  /* Slightly increased top/bottom for header space */
-  width: 50%;
-  height: 84%;  /* Your existing fixed height */
-  max-width: 90%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  animation: modalPop 0.25s ease;
-  position: relative;
-  box-sizing: border-box;  /* NEW: Includes padding in height */
-}
+    /* modal content box - NO LONGER SCROLLABLE (handles sizing only) */
+    .patient-full-info {
+      background: #fff;
+      /* Fixed: Removed invalid 'round' */
+      border-radius: 10px;
+      padding: 1.5rem 2.8rem;
+      /* Slightly increased top/bottom for header space */
+      width: 50%;
+      height: 84%;
+      /* Your existing fixed height */
+      max-width: 90%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      animation: modalPop 0.25s ease;
+      position: relative;
+      box-sizing: border-box;
+      /* NEW: Includes padding in height */
+    }
 
-/* close button */
-.close-modal-full-info {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 2rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #502C00;
-  z-index: 1;  /* Ensures it's above content */
-}
-.close-modal-full-info:hover {
-  transform: scale(1.2);
-  color: #8B5E34;
-}
+    /* close button */
+    .close-modal-full-info {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #502C00;
+      z-index: 1;
+      /* Ensures it's above content */
+    }
 
-/* animation */
-@keyframes modalPop {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+    .close-modal-full-info:hover {
+      transform: scale(1.2);
+      color: #8B5E34;
+    }
 
-.modal-header {
-    justify-content: center;
-}
+    /* animation */
+    @keyframes modalPop {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
 
-.modal-header h3 {
-    margin-top: 1.5rem;
-    color: #502C00;
-}
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 
-/* NOW SCROLLABLE: Inner body handles overflow */
-.modal-body {
-  border: 1px solid var(--color-text);
-  border-radius: 15px;
-  padding: 0.2rem 2rem;
-  color: var(--color-text);
-  background-color: var(--color-secondary);
-  max-height: calc(100% - 120px);  /* NEW: Limit height (subtract header/close space; adjust if needed) */
-  overflow-y: auto;  /* NEW: Enable vertical scrolling inside the body */
-  overflow-x: hidden;  /* NEW: Prevent horizontal scrolling */
-  margin-top: 1rem;  /* Space from header */
-  box-sizing: border-box;  /* NEW: Includes padding/border in height */
-  
-  /* NEW: Custom scrollbar for Firefox (on .modal-body) */
-  scrollbar-width: thin;
-  scrollbar-color: #fff;
-}
+    .modal-header {
+      justify-content: center;
+    }
 
-/* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) - NOW ON .modal-body */
-.modal-body::-webkit-scrollbar {
-  width: 8px;  /* Thin scrollbar */
-}
-.modal-body::-webkit-scrollbar-track {
-  background: #fff;  /* Track color from theme */
-  border-radius: 4px;
-}
-.modal-body::-webkit-scrollbar-thumb {
-  background: #fff;  /* Thumb color from theme */
-  border-radius: 4px;
-}
-.modal-body::-webkit-scrollbar-thumb:hover {
-  background: var(--color-tertiary);  /* Hover: Use tertiary color */
-}
+    .modal-header h3 {
+      margin-top: 1.5rem;
+      color: #502C00;
+    }
 
-.modal-body p {
-    border-radius: 5px;
-    font-weight: 500;
-    border: 1px solid var(--color-text);
-    padding: 5px 0;
-    background-color: #fff;
-    margin-bottom: 0.5rem;  /* Ensure spacing even when scrolling */
-}
+    /* NOW SCROLLABLE: Inner body handles overflow */
+    .modal-body {
+      border: 1px solid var(--color-text);
+      border-radius: 15px;
+      padding: 0.2rem 2rem;
+      color: var(--color-text);
+      background-color: var(--color-secondary);
+      max-height: calc(100% - 120px);
+      /* NEW: Limit height (subtract header/close space; adjust if needed) */
+      overflow-y: auto;
+      /* NEW: Enable vertical scrolling inside the body */
+      overflow-x: hidden;
+      /* NEW: Prevent horizontal scrolling */
+      margin-top: 1rem;
+      /* Space from header */
+      box-sizing: border-box;
+      /* NEW: Includes padding/border in height */
 
-.modal-body p::before {
-  content: '';
-  border-left: 4px solid var(--color-text);
-  width: 100%;
-  border-radius: 5px;
-  /* Note: ::before on p might not display as expected; consider restructuring if it's not showing */
-}
+      /* NEW: Custom scrollbar for Firefox (on .modal-body) */
+      scrollbar-width: thin;
+      scrollbar-color: #fff;
+    }
 
-.modal-body h4 {
-    text-align: left;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: #502C00;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
+    /* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) - NOW ON .modal-body */
+    .modal-body::-webkit-scrollbar {
+      width: 8px;
+      /* Thin scrollbar */
+    }
 
-.adminside-patientFullInfo {
-    display: flex;
-    flex-wrap: wrap;  /* Allow items to wrap to the next line */
-    gap: 1rem;  /* MOVED: Added gap here for spacing between p items (instead of on p) */
-    width: 100%;  /* Ensure container takes up full width */
-    justify-content: center;
-}
+    .modal-body::-webkit-scrollbar-track {
+      background: #fff;
+      /* Track color from theme */
+      border-radius: 4px;
+    }
 
-.adminside-patientFullInfo p {
-    flex: 1 1 45%; /* Each paragraph takes up about 45% of the container width */
-    margin: 0.5rem 0; /* Vertical spacing only (side margins removed; use gap on parent) */
-    text-align: left;
-}
+    .modal-body::-webkit-scrollbar-thumb {
+      background: #fff;
+      /* Thumb color from theme */
+      border-radius: 4px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-tertiary);
+      /* Hover: Use tertiary color */
+    }
+
+    .modal-body p {
+      border-radius: 5px;
+      font-weight: 500;
+      border: 1px solid var(--color-text);
+      padding: 5px 0;
+      background-color: #fff;
+      margin-bottom: 0.5rem;
+      /* Ensure spacing even when scrolling */
+    }
+
+    .modal-body p::before {
+      content: '';
+      border-left: 4px solid var(--color-text);
+      width: 100%;
+      border-radius: 5px;
+      /* Note: ::before on p might not display as expected; consider restructuring if it's not showing */
+    }
+
+    .modal-body h4 {
+      text-align: left;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #502C00;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .adminside-patientFullInfo {
+      display: flex;
+      flex-wrap: wrap;
+      /* Allow items to wrap to the next line */
+      gap: 1rem;
+      /* MOVED: Added gap here for spacing between p items (instead of on p) */
+      width: 100%;
+      /* Ensure container takes up full width */
+      justify-content: center;
+    }
+
+    .adminside-patientFullInfo p {
+      flex: 1 1 45%;
+      /* Each paragraph takes up about 45% of the container width */
+      margin: 0.5rem 0;
+      /* Vertical spacing only (side margins removed; use gap on parent) */
+      text-align: left;
+    }
 
 
-/* Modal for Patient History na detailed */
-/* ===== Patient Detailed History Modal ===== */
+    /* Modal for Patient History na detailed */
+    /* ===== Patient Detailed History Modal ===== */
 
-.admin-patient-detail-history-container {
-  position: fixed;
-  inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
- background: rgba(0, 0, 0, 0.4); /* semi-transparent background */
-  display: none; /* hidden by default */
-  justify-content: center;
-  align-items: center;
-  z-index: 2000; /* ensure it stays on top */
-  transition: opacity 0.3s ease;
-  overflow-y: auto;
-  width: 100%;
-  height: 100vh;
-}
+    .admin-patient-detail-history-container {
+      position: fixed;
+      inset: 0;
+      /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
+      background: rgba(0, 0, 0, 0.4);
+      /* semi-transparent background */
+      display: none;
+      /* hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      /* ensure it stays on top */
+      transition: opacity 0.3s ease;
+      overflow-y: auto;
+      width: 100%;
+      height: 100vh;
+    }
 
-.admin-patient-detail-history-container.active {
-  display: flex;
+    .admin-patient-detail-history-container.active {
+      display: flex;
 
-}
+    }
 
-/* Modal box itself */
-.admin-patient-detailed-history {
-  background-color: #fff;
-  width: 50%;
-  max-width: 90%;
-  height: 50%;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  animation: modalPop 0.25s ease;
-}
+    /* Modal box itself */
+    .admin-patient-detailed-history {
+      background-color: #fff;
+      width: 50%;
+      max-width: 90%;
+      height: 50%;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: modalPop 0.25s ease;
+    }
 
-/* Header with title and close button */
-.admin-patient-detailed-history-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f8f8f8;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #ddd;
+    /* Header with title and close button */
+    .admin-patient-detailed-history-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f8f8f8;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #ddd;
 
-  
-}
 
-.admin-patient-detailed-history-title h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: var(--color-text);
-  font-weight: 600;
-}
+    }
 
-.patient-detailed-history-close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: var(--color-text);
-  cursor: pointer;
+    .admin-patient-detailed-history-title h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: var(--color-text);
+      font-weight: 600;
+    }
 
-}
+    .patient-detailed-history-close-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--color-text);
+      cursor: pointer;
 
-.patient-detailed-history-close-btn:hover {
- transform: scale(1.2);
-  color: #8B5E34;
-}
+    }
 
-/* Body content (remarks, notes, etc.) */
-.patient-history-remarks-modal {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.patient-history-remarks-modal h3{
-  font-size: 1.2rem;
-  color: var(--color-text);
-}
+    .patient-detailed-history-close-btn:hover {
+      transform: scale(1.2);
+      color: #8B5E34;
+    }
 
-.patient-history-remarks-wrapper,
-.patient-history-notes-wrapper {
-  background: #fafafa;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
+    /* Body content (remarks, notes, etc.) */
+    .patient-history-remarks-modal {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-.patient-history-remarks,
-.patient-history-notes {
-  color: var(--color-text);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
+    .patient-history-remarks-modal h3 {
+      font-size: 1.2rem;
+      color: var(--color-text);
+    }
+
+    .patient-history-remarks-wrapper,
+    .patient-history-notes-wrapper {
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #50280321;
+      height: 120px;
+    }
+
+    .patient-history-remarks,
+    .patient-history-notes {
+      color: var(--color-text);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-align: justify;
+    }
