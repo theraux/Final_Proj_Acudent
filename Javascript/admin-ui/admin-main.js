@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Automatically load the dashboard by default when page loads
-  loadPage('../../HTML/admin-ui/admin-subfolder/admin-patient-management.html');
+  loadPage('../../HTML/admin-ui/admin-subfolder/admin-inventory-management.html');
 });
 
 
