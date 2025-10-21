@@ -43,7 +43,7 @@ function initAdminPatientManagement() {
             // Hide the main patient profiles container
             document.getElementById('patient-profiles').classList.add('hidden');
 
-            // Show the profile section
+            // Show the profile section 
             const profileSection = document.getElementById('patientprofile-info');
             if (profileSection) {
                 profileSection.classList.remove('hidden');

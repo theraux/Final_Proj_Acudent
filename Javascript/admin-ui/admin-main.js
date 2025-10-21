@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Automatically load the dashboard by default when page loads
-  loadPage('../../HTML/admin-ui/admin-subfolder/admin-inventory-management.html');
+  loadPage('../../HTML/admin-ui/admin-subfolder/admin-reports.html');
 });
 
 
@@ -125,7 +125,7 @@ function initPageScript(pageUrl) {
       initAdminInventoryManagement();
     } else {
       const script = document.createElement('script');
-      script.src = '../../Javascript/admin-ui/admin-subfolder/admin-inventory-management.js';
+      script.src = '../../Javascript/admin-ui/admin-backup/admin-inventory-management.js';
       script.defer = true;
       script.onload = () => initAdminInventoryManagement();
       document.body.appendChild(script);
@@ -134,10 +134,10 @@ function initPageScript(pageUrl) {
 
   if (pageUrl.includes('admin-reports.html')) {
     if (typeof initAdminReports === 'function') {
-      initAdminAdminReportst();
+      initAdminReports();
     } else {
       const script = document.createElement('script');
-      script.src = '../../Javascript/admin-ui/admin-subfolder/admin-reports.js';
+      script.src = '../../Javascript/admin-ui/admin-backup/admin-reports.js';
       script.defer = true;
       script.onload = () => initAdminReports();
       document.body.appendChild(script);
