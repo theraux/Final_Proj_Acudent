@@ -478,7 +478,7 @@
       border: none;
       background: none;
       cursor: pointer;
-      color: #502C00;
+      color: var(--color-text);
       z-index: 1;
       /* Ensures it's above content */
     }

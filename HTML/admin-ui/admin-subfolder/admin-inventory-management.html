@@ -2,7 +2,10 @@
 <section id="admin-inventory" class="inventory-container">
     <div class="inventory">
         <div class="inventory-section">
-            <h3><i class="fa-solid fa-boxes-stacked"></i>Inventory</h3>
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <div class="inventory-section-title">
+                <h3></i>Inventory</h3>
+            </div>
         </div>
 
         <div class="overview-container">
@@ -12,7 +15,7 @@
             <div
                 class="row row-cols-xxl-3 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 d-flex justify-content-center p-1 ">
                 <div class="col-xxl-4 cols-lg-4 cols-md-6 cols-sm-12">
-                    <div class="overview-wrapper">
+                    <div class="overview-wrapper d-flex flex-row align-items-center">
                         <div class="overview-wrapper-i">
                             <i class="fa-solid fa-circle" style="color:  rgba(48, 128, 48, 0.623);"></i>
                         </div>
@@ -23,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-4 cols-lg-4 cols-md-6 cols-sm-12">
-                    <div class="overview-wrapper">
+                    <div class="overview-wrapper d-flex flex-row align-items-center">
                         <div class="overview-wrapper-i">
                             <i class="fa-solid fa-circle" style="color:  rgba(236, 236, 120, 0.726);"></i>
                         </div>
@@ -34,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-4 cols-lg-4 cols-md-6 cols-sm-12">
-                    <div class="overview-wrapper">
+                    <div class="overview-wrapper d-flex flex-row align-items-center">
                         <div class="overview-wrapper-i">
                             <i class="fa-solid fa-circle" style="color:  red;"></i>
                         </div>
@@ -73,7 +76,7 @@
                             <th>Expiration Date</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-inventory-body" data-target="admin-inventory-detail-container">
+                    <tbody id="admin-inventory-body" data-target="admin-inventory-detail">
                         <tr>
                             <td>Oral Care</td>
                             <td>50</td>
@@ -85,7 +88,6 @@
                 </table>
             </div>
         </div>
-        <button class="inventory-report" tabindex="0" data-target="admin-inventory-report">Report</button>
     </div>
 </section>
 
@@ -96,33 +98,44 @@
             <button class="close-modal-detail">&times;</button>
         </div>
         <h3>Inventory Details</h3>
-        <table class="table admin-inventory-detail-table" id="admin-inventoryDetail-table">
-            <thead>
-                <tr>
-                    <th>Service</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Used</th>
-                </tr>
-            </thead>
-            <tbody id="admin-inventoryDetail-body">
-                <tr>
-                    <td>Oral Care</td>
-                    <td>Fluoride Paste</td>
-                    <td>2025-10-07</td>
-                    <td>10:30 AM</td>
-                    <td>2 Units</td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="inventory-table-detail-wrapper">
+            <div class="inventory-table-detail container">
+                <table class="table admin-inventory-detail-table" id="admin-inventoryDetail-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Used</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-inventoryDetail-body">
+                        <tr>
+                            <td>Oral Care</td>
+                            <td>Fluoride Paste</td>
+                            <td>2025-10-07</td>
+                            <td>10:30 AM</td>
+                            <td>2 Units</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
 
 
 <!--------------Inventory Report--------------------->
-<section id="admin-inventory-report" class="admin-inventory-report-container">
+<section id="admin-inventory-report" class="admin-inventory-report-container hidden">
     <div class="admin-inventory-report">
+        <div class="inventory-report-back">
+            <button class="back-to-report-btn"><i class="fas fa-arrow-left" title="back to Report"></i></button>
+        </div>
+        <div class="inventory-report-title">
+            <h3>Inventory Report</h3>
+        </div>
         <div class="inventory-report-section">
             <h3>Weekly Report <span><i class="fas fa-caret-down"></i></span></h3>
         </div>
