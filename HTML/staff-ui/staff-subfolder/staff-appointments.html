@@ -1,8 +1,13 @@
 <section id="staff-appointment-scheduler" class="staff-appointment-container">
     <div class="staff-appointment">
-        <div class="today-appointment">
-            <h3>Today's Appointment</h3>
+
+        <div class="calendar-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+            <div class="today-appointment">
+                <h3>Today's Appointment</h3>
+            </div>
         </div>
+
 
         <div class="row staff-appointment-wrapper row-cols-2">
             <div class="col-4">
@@ -82,61 +87,68 @@
 </section>
 
 
+
 <!---------Calendar-------------->
-<section class="admin-calendar-appointment-section" id="admin-calendar-appointments-section">
-    <div class="admin-calendar-appointments-wrapper">
-        <div class="admin-appointment-title-wrapper">
-            <h2>Appointments</h2>
-            <div class="admin-appointment-prev-next-month">
-                <button onclick="prevmonth()" class="btn-month" id="btn-previous-month"><i
-                        class="fa-solid fa-chevron-left"></i></button>
-                <h3 id="month-year"></h3>
-                <button onclick="nextmonth()" class="btn-month" id="btn-next-month"><i
-                        class="fa-solid fa-chevron-right"></i></button>
-                <div class="admin-appointment-edit-schedule">
-                    <button class="admin-edit-sched" id="edit-schedule" title="Edit Appointment" tabindex="0"
-                        data-target="admin-calendar-appointment-section">Edit</button>
+<section class="shared-calendar-appointment-section" id="staff-calendar-appointments-section">
+    <div class="shared-calendar-appointments-wrapper">
+        <div class="shared-appintment-wrapper">
+            <div class="shared-appointment-title-wrapper">
+                <h2>Appointments</h2>
+                <div class="shared-appointment-p">
+                    <p>See what's your appointments for today</p>
                 </div>
             </div>
         </div>
+        <div class="shared-appointment-prev-next-month">
+            <button onclick="prevmonth()" class="btn-month" id="btn-previous-month"><i
+                    class="fa-solid fa-chevron-left"></i></button>
+            <h3 id="month-year"></h3>
+            <button onclick="nextmonth()" class="btn-month" id="btn-next-month"><i
+                    class="fa-solid fa-chevron-right"></i></button>
+            <div class="shared-appointment-edit-schedule">
+                <button class="shared-edit-sched" id="edit-schedule" title="Edit Appointment" tabindex="0"
+                    data-target="admin-calendar-appointment-section">Edit</button>
+            </div>
+        </div>
 
-        <div class="row admin-calendar-appointments-container-row row-cols-1"
-            id="admin-calendar-appointments-container">
+
+        <div class="row shared-calendar-appointments-container-row row-cols-1"
+            data-id="staff-calendar-appointments-container">
             <!-- Appointment items will be dynamically added here -->
             <div class="col name-of-the-day">
                 <div class="row row-cols-7">
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Sun</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Mon</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Tue</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Wed</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Thu</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Fri</p>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="admin-calendar-days">
+                        <div class="shared-calendar-days">
                             <p>Sat</p>
                         </div>
                     </div>
@@ -145,6 +157,44 @@
 
             <div class="col number-of-days">
                 <!-- Days will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-id="shared-edit-appointment-schedule-id" class="shared-edit-appointment-schedule-modal">
+    <div class="shared-edit-appointment-wrapper">
+        <div class="shared-appointment-schedule-title">
+            <h3>Appointment Scheduler</h3>
+        </div>
+
+        <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 row-cols-1">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="shared-appointment-schedule-container">
+                   <label>Appointment Time </label>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="shared-appointment-schedule-input">
+                    <label>
+                        <input type="time" data-id="staff-time-id" name="time">
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="shared-appointment-schedule-container">
+                    <label>Appointment Type </label>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="shared-appointment-schedule-input">
+                    <label for="Service">Service</label>
+                    <select data-id="service" name="service"> 
+                        <option value="Service" disabled>Service</option>
+                        <option value="Cleaning">Cleaning</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
