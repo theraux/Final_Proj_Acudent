@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.content-area');
 
   // ===== Function to load a page (reusable) =====
-  function loadPage(pageUrl) {
+  window.loadPage = function (pageUrl, addToHistory = true){
     fetch(pageUrl)
       .then(res => res.text())
       .then(html => {
         container.innerHTML = html;
+
+        
 
         if (pageUrl.includes("dashboard")) document.title = "Admin Portal - Dashboard";
         else if (pageUrl.includes("appointments")) document.title = "Admin Portal - Appointments";
@@ -22,6 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (pageUrl.includes("security")) document.title = "Admin Portal - Account Security";
         else if (pageUrl.includes("settings")) document.title = "Admin Portal - Settings";
         else document.title = "Admin Portal";
+
+        if (typeof window.loadPage === 'function') {
+    console.log('Navigating to:', url);
+    window.loadPage(url);
+} else {
+    console.warn('⚠️ loadPage() function not found.');
+}
+
         // ✅ Always reset scroll to top
         window.scrollTo(0, 0);
         const contentArea = document.querySelector('.main-content-area-container');
@@ -43,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Automatically load the dashboard by default when page loads
-  loadPage('../../HTML/admin-ui/admin-subfolder/admin-reports.html');
+  loadPage('../../HTML/admin-ui/admin-subfolder/admin-appointment-reports.html');
 });
 
 
@@ -186,6 +196,18 @@ function initPageScript(pageUrl) {
       script.src = '../../Javascript/admin-ui/admin-subfolder/admin-settings.js';
       script.defer = true;
       script.onload = () => initAdminSettings();
+      document.body.appendChild(script);
+    }
+  }
+
+  if (pageUrl.includes('admin-appointment-reports.html')) {
+    if (typeof initAdminAppointmentReports === 'function') {
+      initAdminAppointmentReports();
+    } else {
+      const script = document.createElement('script');
+      script.src = '../../Javascript/admin-ui/admin-backup/admin-appointment-reports.js';
+      script.defer = true;
+      script.onload = () => AdminAppointmentReports();
       document.body.appendChild(script);
     }
   }
